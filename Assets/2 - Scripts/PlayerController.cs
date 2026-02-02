@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public void MoveCharacter(Vector3 targetPos)
     {
-        transform.position = Vector3.Lerp(transform.position, targetPos, _speedPlayerMove * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), _speedPlayerMove * Time.deltaTime);
     }
 
 }
