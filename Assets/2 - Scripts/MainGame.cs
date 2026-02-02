@@ -4,10 +4,14 @@ using UnityEngine.InputSystem;
 
 public class MainGame : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] CameraFollow _cameraFollow;
+    [SerializeField] PlayerController _playerController;
+    
+    [Header("Variable")]    
     [SerializeField] LayerMask _boxLayer;
-    [SerializeField] GameObject _player;
-    [Range(5f, 10f)]
-    [SerializeField] float _speedPlayerMove;
+    //[SerializeField] GameObject _player;
+    
     bool _isPlayerMoving = false;
     Vector3 _targetPosition;
 
@@ -28,7 +32,10 @@ public class MainGame : MonoBehaviour
     {
         if (_isPlayerMoving)
         {
-            MoveCharacter();
+            _playerController.MoveCharacter(_targetPosition);
+            _cameraFollow.CameraMovement(_targetPosition);
+            if ((transform.position - _targetPosition).sqrMagnitude < 0.01f)
+                _isPlayerMoving = false;
         }
 
     }
@@ -50,14 +57,4 @@ public class MainGame : MonoBehaviour
 
         }
     }
-
-
-    private void MoveCharacter()
-    {
-        _player.transform.position = Vector3.Lerp(_player.transform.position, _targetPosition, _speedPlayerMove * Time.deltaTime);
-        if ((_player.transform.position - _targetPosition).sqrMagnitude < 0.01f)
-            _isPlayerMoving = false;
-    }
-
-
 }
