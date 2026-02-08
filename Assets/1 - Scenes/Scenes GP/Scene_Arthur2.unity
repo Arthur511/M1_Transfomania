@@ -683,6 +683,37 @@ MonoBehaviour:
   _casesDatas:
   - Char: 42
     Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+--- !u!1 &914867407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 914867408}
+  m_Layer: 0
+  m_Name: LevelCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &914867408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914867407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.5, y: 0.25, z: 22.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589470937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,8 +1297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedCamera: 7
+  _speedCamera: 1.5
   _offset: {x: 0, y: 12, z: -15}
+  _levelCenter: {fileID: 914867408}
 --- !u!1 &1806814323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,3 +1731,4 @@ SceneRoots:
   - {fileID: 1939893874}
   - {fileID: 785705245}
   - {fileID: 400554687}
+  - {fileID: 914867408}
