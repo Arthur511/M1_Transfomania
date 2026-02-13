@@ -648,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraFollow: {fileID: 1771824905}
   _playerController: {fileID: 400554688}
+  _levelManager: {fileID: 785705246}
   _boxLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -683,6 +684,8 @@ MonoBehaviour:
   _casesDatas:
   - Char: 42
     Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+  _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
+  _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
 --- !u!1 &914867407
 GameObject:
   m_ObjectHideFlags: 0
