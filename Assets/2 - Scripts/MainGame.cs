@@ -24,10 +24,10 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        _cameraFollow.gameObject.transform.position = (_cameraFollow.LevelCenter.position - _playerController.transform.position)/2 + _cameraFollow.Offset;
     }
     private void Start()
     {
+        _cameraFollow.gameObject.transform.position = (_cameraFollow.LevelCenter.position - _playerController.transform.position)/2 + _cameraFollow.Offset;
         _levelManager.CanMove();
     }
     // Update is called once per frame
