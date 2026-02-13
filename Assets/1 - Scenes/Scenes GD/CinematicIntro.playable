@@ -41,13 +41,13 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 8781997480881558724}
-    m_Duration: 2.816666666666667
+    m_Duration: 5.833333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -4892376348557469261}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: 1.7666666666666668
+    m_BlendOutDuration: 2.816666666666667
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -107,7 +107,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: CineChild_01
   - m_Version: 1
-    m_Start: 1.05
+    m_Start: 3.016666666666666
     m_ClipIn: 0
     m_Asset: {fileID: -8138240706666079151}
     m_Duration: 2.816666666666667
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_ParentTrack: {fileID: -4892376348557469261}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1.7666666666666668
+    m_BlendInDuration: 2.816666666666667
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
