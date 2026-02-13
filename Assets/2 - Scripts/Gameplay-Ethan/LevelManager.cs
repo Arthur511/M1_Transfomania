@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -19,12 +20,12 @@ public class LevelManager : MonoBehaviour
         new Vector2Int(0, 1),
         new Vector2Int(0, -1)
     };
-    List<Case> _currentAccessibleCases;
+    List<Case> _currentAccessibleCases = new List<Case>();
 
-    public LevelManager(TextAsset maping)
+    /*public LevelManager(TextAsset maping)
     {
         _maping = maping;
-    }
+    }*/
     
     private void Awake()
     {
@@ -35,14 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        _neighborDirection = new Vector2Int[]
-        {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1)
-        };
-        _currentAccessibleCases = new List<Case>();
+        
     }
 
 
@@ -88,22 +82,20 @@ public class LevelManager : MonoBehaviour
         foreach (var dir in _neighborDirection)
         {
             var neighbor = MainGame.Instance.PlayerController.PlayerPosition + dir;
-#if UNITY_EDITOR
-            Debug.Log(_map[neighbor.x, neighbor.y]);
-#endif
-            if (_map[neighbor.x, neighbor.y].TryGetComponent<Case>(out Case _case))
+
+            if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= _map.GetLength(0) || neighbor.y >= _map.GetLength(1))
+                { continue; }
+
+            if (_map[neighbor.x, neighbor.y] != null)
             {
-                _case.gameObject.GetComponent<MeshRenderer>().material = _accessCaseMat;
-                _currentAccessibleCases.Add(_case);
+                _map[neighbor.x, neighbor.y].gameObject.GetComponent<MeshRenderer>().material = _accessCaseMat;
+                _currentAccessibleCases.Add(_map[neighbor.x, neighbor.y]);
             }
         }
     }
 
     public void ClearMatOnCases()
     {
-#if UNITY_EDITOR
-        Debug.Log(_currentAccessibleCases);
-#endif
         if (_currentAccessibleCases.Count > 0)
         {
             foreach (var _case in _currentAccessibleCases)

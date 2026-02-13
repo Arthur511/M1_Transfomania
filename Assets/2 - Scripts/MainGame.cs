@@ -24,7 +24,7 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        _cameraFollow.SetCurrentOffset(_playerController);
+        _cameraFollow.gameObject.transform.position = (_cameraFollow.LevelCenter.position - _playerController.transform.position)/2 + _cameraFollow.Offset;
     }
     private void Start()
     {
@@ -40,9 +40,11 @@ public class MainGame : MonoBehaviour
     {
         if (_isPlayerMoving)
         {
+            
             _playerController.MoveCharacter(_targetPosition);
-            if ((transform.position - _targetPosition).sqrMagnitude < 0.01f)
+            if ((_playerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
             {
+                Debug.Log("Fin mouvement");
                 _isPlayerMoving = false;
                 _levelManager.CanMove();
             }
@@ -67,18 +69,18 @@ public class MainGame : MonoBehaviour
             {
                 if (1 << hit.collider.gameObject.layer == _boxLayer.value)
                 {
-                    _isPlayerMoving = true;
-                    _isCameraMoving = true;
                     Vector2Int clickPos;
                     if (hit.transform.GetComponent<Case>() == null)
                         return;
                     clickPos = hit.transform.GetComponent<Case>().CasePosition;
                     if (_playerController.CanMoveAtPosition(clickPos))
                     {
+                        _isPlayerMoving = true;
+                        _isCameraMoving = true;
                         _targetPosition = hit.transform.position;
                         _playerController.PlayerPosition = clickPos;
+                        _levelManager.ClearMatOnCases();
                     }
-                    _levelManager.ClearMatOnCases();
 
                 }
             }

@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    public Vector3 Offset => _offset;
+    public Transform LevelCenter => _levelCenter;
 
     [Range(1f, 3f)]
     [SerializeField] float _speedCamera;
     [SerializeField] Vector3 _offset;
-    public Vector3 Offset => _offset;
     [SerializeField] Transform _levelCenter;
     public void SetCurrentOffset(PlayerController player)
     {
