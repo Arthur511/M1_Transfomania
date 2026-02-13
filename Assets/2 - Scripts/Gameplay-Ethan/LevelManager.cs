@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour
                     GameObject gObj = Instantiate(casesEntitesDict[character].Prefab, new Vector3(x * _caseSize.x, 0 , y * _caseSize.z), Quaternion.identity);
                     gObj.transform.localScale = _caseSize;
                     _map[x, y] = gObj.GetComponent<Case>();
+                    _map[x, y].CasePosition = new Vector2Int(x, y);
                 }
             }
         }

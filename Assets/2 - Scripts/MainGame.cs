@@ -4,22 +4,25 @@ using UnityEngine.InputSystem;
 
 public class MainGame : MonoBehaviour
 {
+    public static MainGame Instance;
+
     [Header("References")]
     [SerializeField] CameraFollow _cameraFollow;
     [SerializeField] PlayerController _playerController;
-    
-    [Header("Variable")]    
+
+    [Header("Variable")]
     [SerializeField] LayerMask _boxLayer;
     //[SerializeField] GameObject _player;
-    
+
     bool _isPlayerMoving = false;
     bool _isCameraMoving = false;
     Vector3 _targetPosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
+        Instance = this;
         _cameraFollow.SetCurrentOffset(_playerController);
     }
 
@@ -59,7 +62,15 @@ public class MainGame : MonoBehaviour
                 {
                     _isPlayerMoving = true;
                     _isCameraMoving = true;
-                    _targetPosition = hit.transform.position;
+                    Vector2Int clickPos;
+                    if (hit.transform.GetComponent<Case>() == null)
+                        return;
+                    clickPos = hit.transform.GetComponent<Case>().CasePosition;
+                    if (_playerController.CanMove(clickPos))
+                    {
+                        _targetPosition = hit.transform.position;
+                        _playerController.PlayerPosition = clickPos;
+                    }
                 }
             }
         }
