@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_cartoon_shader
+  m_Name: violet
   m_Shader: {fileID: -6465566751694194690, guid: c387db55d18cbe54c8e3fe6930973c7c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -61,6 +61,6 @@ Material:
     - _QueueOffset: 0
     - _Shades: 0.43
     m_Colors:
-    - _Color: {r: 0.2019827, g: 0.5377358, b: 0.06848522, a: 1}
+    - _Color: {r: 0.40784314, g: 0.24313726, b: 0.42352942, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
