@@ -681,11 +681,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maping: {fileID: 4900000, guid: baf6c41b66c931046b721dd1b0242874, type: 3}
   _caseSize: {x: 5, y: 0.5, z: 5}
-  _casesDatas:
+  _casesTypeDatas:
   - Char: 42
-    Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+    Prefab: {fileID: 2020277331}
+    CaseType: 0
+  - Char: 83
+    Prefab: {fileID: 2020277331}
+    CaseType: 1
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
+  NPC_BaseState: 0
 --- !u!1 &914867407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,6 +1564,11 @@ Transform:
   - {fileID: 1806814324}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2020277331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+  m_PrefabInstance: {fileID: 2614554855012140187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2059649986
 GameObject:
   m_ObjectHideFlags: 0
