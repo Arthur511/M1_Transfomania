@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 public class MainGame : MonoBehaviour
 {
     public static MainGame Instance;
+    public PlayerController PlayerController => _playerController;
 
     [Header("References")]
     [SerializeField] CameraFollow _cameraFollow;
     [SerializeField] PlayerController _playerController;
-
+    [SerializeField] LevelManager _levelManager;
     [Header("Variable")]
     [SerializeField] LayerMask _boxLayer;
     //[SerializeField] GameObject _player;
@@ -25,7 +26,10 @@ public class MainGame : MonoBehaviour
         Instance = this;
         _cameraFollow.SetCurrentOffset(_playerController);
     }
-
+    private void Start()
+    {
+        _levelManager.CanMove();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +42,10 @@ public class MainGame : MonoBehaviour
         {
             _playerController.MoveCharacter(_targetPosition);
             if ((transform.position - _targetPosition).sqrMagnitude < 0.01f)
+            {
                 _isPlayerMoving = false;
+                _levelManager.CanMove();
+            }
         }
 
         if (_isCameraMoving)
@@ -66,11 +73,13 @@ public class MainGame : MonoBehaviour
                     if (hit.transform.GetComponent<Case>() == null)
                         return;
                     clickPos = hit.transform.GetComponent<Case>().CasePosition;
-                    if (_playerController.CanMove(clickPos))
+                    if (_playerController.CanMoveAtPosition(clickPos))
                     {
                         _targetPosition = hit.transform.position;
                         _playerController.PlayerPosition = clickPos;
                     }
+                    _levelManager.ClearMatOnCases();
+
                 }
             }
         }
