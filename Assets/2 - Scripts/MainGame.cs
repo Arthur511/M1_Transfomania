@@ -1,18 +1,22 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour
 {
     public static MainGame Instance;
     public PlayerController PlayerController => _playerController;
+    public LevelManager LevelManager => _levelManager;
 
     [Header("References")]
     [SerializeField] CameraFollow _cameraFollow;
     [SerializeField] PlayerController _playerController;
     [SerializeField] LevelManager _levelManager;
-    [Header("Variable")]
+    [Header("Variables")]
     [SerializeField] LayerMask _boxLayer;
+    [SerializeField] GameObject _hideButton;
     //[SerializeField] GameObject _player;
 
     bool _isPlayerMoving = false;
@@ -27,26 +31,27 @@ public class MainGame : MonoBehaviour
     }
     private void Start()
     {
-        _cameraFollow.gameObject.transform.position = (_cameraFollow.LevelCenter.position - _playerController.transform.position)/2 + _cameraFollow.Offset;
-        _levelManager.CanMove();
+        _cameraFollow.gameObject.transform.position = _playerController.transform.position + (_cameraFollow.LevelCenter.position - _playerController.transform.position) / 2 + _cameraFollow.Offset;
+        _levelManager.CanPlayerMoveTo();
     }
     // Update is called once per frame
     void Update()
     {
+        //if (Level_State.PlayerTurn)
         OnClick();
+
     }
 
     private void FixedUpdate()
     {
         if (_isPlayerMoving)
         {
-            
+
             _playerController.MoveCharacter(_targetPosition);
             if ((_playerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
             {
-                Debug.Log("Fin mouvement");
                 _isPlayerMoving = false;
-                _levelManager.CanMove();
+                _levelManager.CanPlayerMoveTo();
             }
         }
 
@@ -79,6 +84,10 @@ public class MainGame : MonoBehaviour
                         _isCameraMoving = true;
                         _targetPosition = hit.transform.position;
                         _playerController.PlayerPosition = clickPos;
+
+                        _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(_playerController);
+                        _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(_playerController));
+                        
                         _levelManager.ClearMatOnCases();
                     }
 
@@ -86,4 +95,19 @@ public class MainGame : MonoBehaviour
             }
         }
     }
+
+    public void HidePlayer(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _playerController.IsHiding = !_playerController.IsHiding;
+            _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
+        }
+    }
+    public void HidePlayer()
+    {
+        _playerController.IsHiding = !_playerController.IsHiding;
+        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
+    }
+
 }

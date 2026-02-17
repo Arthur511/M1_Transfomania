@@ -1,24 +1,31 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
     public Vector2Int PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
+    public bool IsHiding { get; set; }
     public int BoxPositionX => _boxPositionX;
     public int BoxPositionZ => _boxPositionZ;
-    
+
     [UnityEngine.Range(5f, 10f)]
     [SerializeField] float _speedPlayerMove;
+    [SerializeField] LayerMask _lollipopLayer;
 
     int _boxPositionX;
     int _boxPositionZ;
     Vector2Int _playerPosition;
-    
+    bool _isHiding = false;
+    int _lollipopCount = 0;
+
+
     public void Update()
     {
-       
+
     }
 
     public void MoveCharacter(Vector3 targetPos)
@@ -36,5 +43,14 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (1 << other.gameObject.layer == _lollipopLayer.value)
+        {
+            Destroy(other.gameObject);
+            _lollipopCount++;
+        }
+    }
 }

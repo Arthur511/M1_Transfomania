@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -10,6 +11,10 @@ public class LevelManager : MonoBehaviour
     {
         _maping = maping;
     }*/
+
+
+    public int[,] DistanceFromPlayer { get; set; }
+    public Case[,] Map => _map;
 
     [SerializeField] private TextAsset _maping;
     [SerializeField] private Vector3 _caseSize = new Vector3(1, 0.5f, 1);
@@ -27,6 +32,8 @@ public class LevelManager : MonoBehaviour
         new Vector2Int(0, -1)
     };
     List<Case> _currentAccessibleCases = new List<Case>();
+
+    private List<GameObject> _debugTexts = new List<GameObject>();
 
     #region State
     public Level_StateManager StateMachine { get; private set; }
@@ -79,7 +86,7 @@ public class LevelManager : MonoBehaviour
 
                     if (casesEntitesDict[character].CaseType == CaseTypeData.TypeOfCases.Spawn)
                     {
-                        MainGame.Instance.PlayerController.transform.position = gObj.transform.position;
+                        MainGame.Instance.PlayerController.transform.position = gObj.transform.position + new Vector3(0, 1, 0);
                         MainGame.Instance.PlayerController.PlayerPosition = new Vector2Int(x, y);
                     }
                 }
@@ -113,16 +120,14 @@ public class LevelManager : MonoBehaviour
             action();
     }
 
-
-
-    public void CanMove()
+    public void CanPlayerMoveTo()
     {
         foreach (var dir in _neighborDirection)
         {
             var neighbor = MainGame.Instance.PlayerController.PlayerPosition + dir;
 
             if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= _map.GetLength(0) || neighbor.y >= _map.GetLength(1))
-                { continue; }
+            { continue; }
 
             if (_map[neighbor.x, neighbor.y] != null)
             {
@@ -131,6 +136,57 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    public void CanChildMoveTo()
+    {
+        foreach (var dir in _neighborDirection)
+        {
+            var neighbor = MainGame.Instance.PlayerController.PlayerPosition + dir;
+
+            if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= _map.GetLength(0) || neighbor.y >= _map.GetLength(1))
+            { continue; }
+
+            if (_map[neighbor.x, neighbor.y] != null)
+            {
+                _map[neighbor.x, neighbor.y].gameObject.GetComponent<MeshRenderer>().material = _accessCaseMat;
+                _currentAccessibleCases.Add(_map[neighbor.x, neighbor.y]);
+            }
+        }
+    }
+
+
+    public int[,] CalculateDistanceFromCase(PlayerController player)
+    {
+        int[,] values = new int[_map.GetLength(0), _map.GetLength(1)];
+        Queue<Vector2Int> posCases = new Queue<Vector2Int>();
+        bool[,] visited = new bool[_map.GetLength(0), _map.GetLength(1)];
+
+        posCases.Enqueue(player.PlayerPosition);
+        visited[player.PlayerPosition.x, player.PlayerPosition.y] = true;
+
+        while (posCases.Count > 0)
+        {
+            var currentPos = posCases.Dequeue();
+            foreach (var dir in _neighborDirection)
+            {
+                var neighbor = currentPos + dir;
+
+                if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= _map.GetLength(0) || neighbor.y >= _map.GetLength(1))
+                { continue; }
+
+                if (visited[neighbor.x, neighbor.y])
+                { continue; }
+
+                if (_map[neighbor.x, neighbor.y] != null)
+                {
+                    values[neighbor.x, neighbor.y] = values[currentPos.x, currentPos.y] + 1;
+                    visited[neighbor.x, neighbor.y] = true;
+                    posCases.Enqueue(neighbor);
+                }
+            }
+        }
+        return values;
+    }
+
 
     public void ClearMatOnCases()
     {
@@ -143,4 +199,37 @@ public class LevelManager : MonoBehaviour
             _currentAccessibleCases.Clear();
         }
     }
+
+    #region DEBUG
+    public void DebugDistanceMap(int[,] values)
+    {
+        // Nettoyer les anciens textes
+        foreach (var txt in _debugTexts)
+            Destroy(txt);
+        _debugTexts.Clear();
+
+        for (int x = 0; x < values.GetLength(0); x++)
+        {
+            for (int y = 0; y < values.GetLength(1); y++)
+            {
+                if (_map[x, y] == null) continue;
+
+                // Créer un GameObject avec TextMeshPro
+                var go = new GameObject($"Debug_{x}_{y}");
+                var tmp = go.AddComponent<TextMeshPro>();
+
+                tmp.text = values[x, y].ToString();
+                tmp.fontSize = 20;
+                tmp.alignment = TextAlignmentOptions.Center;
+                tmp.color = Color.white;
+
+                // Positionner au-dessus de la case
+                go.transform.position = _map[x, y].transform.position + Vector3.up * 0.5f;
+                go.transform.rotation = Quaternion.Euler(90, 0, 0); // À plat sur le plateau
+
+                _debugTexts.Add(go);
+            }
+        }
+    }
+    #endregion
 }
