@@ -12,9 +12,12 @@ public class LevelManager : MonoBehaviour
         _maping = maping;
     }*/
 
-
+    public Level_StateManager StateMachine { get; private set; }
+    public enum BaseStateChoices { Pause, PlayerTurn, AITurn };
+    public BaseStateChoices NPC_BaseState;
     public int[,] DistanceFromPlayer { get; set; }
     public Case[,] Map => _map;
+
 
     [SerializeField] private TextAsset _maping;
     [SerializeField] private Vector3 _caseSize = new Vector3(1, 0.5f, 1);
@@ -22,6 +25,7 @@ public class LevelManager : MonoBehaviour
     [Header("Case's Materials")]
     [SerializeField] private Material _caseMat;
     [SerializeField] private Material _accessCaseMat;
+
 
     private Case[,] _map;
     Vector2Int[] _neighborDirection = new Vector2Int[]
@@ -35,12 +39,9 @@ public class LevelManager : MonoBehaviour
 
     private List<GameObject> _debugTexts = new List<GameObject>();
 
-    #region State
-    public Level_StateManager StateMachine { get; private set; }
-    public enum BaseStateChoices { Pause, PlayerTurn, AITurn };
-    public BaseStateChoices NPC_BaseState;
     private Dictionary<BaseStateChoices, Action> _stateAction;
-    #endregion
+    private int _currentTurn = 0;
+
 
     private void Awake()
     {
@@ -48,14 +49,19 @@ public class LevelManager : MonoBehaviour
         GenerateLevel();
         InitStateAction();
         SetBaseState();
+        StateMachine.SwitchState(new Level_State_PlayerTurn(this));
     }
 
 
     void Update()
     {
-
+        StateMachine.CurrentState.UpdateState();
     }
 
+    private void FixedUpdate()
+    {
+        StateMachine.CurrentState.FixedUpdateState();
+    }
 
     private void GenerateLevel()
     {
@@ -94,6 +100,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+
     private void InitStateAction()
     {
         _stateAction = new Dictionary<BaseStateChoices, Action>
@@ -103,8 +111,6 @@ public class LevelManager : MonoBehaviour
             {BaseStateChoices.AITurn,() => StateMachine.Initialize(new Level_State_AITurn (this))},
         };
     }
-
-
     private void SetBaseState()
     {
         /*
@@ -136,23 +142,6 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    public void CanChildMoveTo()
-    {
-        foreach (var dir in _neighborDirection)
-        {
-            var neighbor = MainGame.Instance.PlayerController.PlayerPosition + dir;
-
-            if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= _map.GetLength(0) || neighbor.y >= _map.GetLength(1))
-            { continue; }
-
-            if (_map[neighbor.x, neighbor.y] != null)
-            {
-                _map[neighbor.x, neighbor.y].gameObject.GetComponent<MeshRenderer>().material = _accessCaseMat;
-                _currentAccessibleCases.Add(_map[neighbor.x, neighbor.y]);
-            }
-        }
-    }
-
 
     public int[,] CalculateDistanceFromCase(PlayerController player)
     {
@@ -186,7 +175,6 @@ public class LevelManager : MonoBehaviour
         }
         return values;
     }
-
 
     public void ClearMatOnCases()
     {
@@ -232,4 +220,15 @@ public class LevelManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void NextTurn()
+    {
+        if (StateMachine.CurrentState is Level_State_PlayerTurn)
+            StateMachine.SwitchState(new Level_State_AITurn(this));
+        else if(StateMachine.CurrentState is Level_State_AITurn)
+            StateMachine.SwitchState(new Level_State_PlayerTurn(this));
+
+        _currentTurn++;
+    }
+
 }

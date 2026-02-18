@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public Vector2Int PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
     public bool IsHiding { get; set; }
+    public GameObject HideButton => _hideButton;
     public int BoxPositionX => _boxPositionX;
     public int BoxPositionZ => _boxPositionZ;
 
@@ -19,9 +20,8 @@ public class PlayerController : MonoBehaviour
     int _boxPositionX;
     int _boxPositionZ;
     Vector2Int _playerPosition;
-    bool _isHiding = false;
+    [SerializeField] GameObject _hideButton;
     int _lollipopCount = 0;
-
 
     public void Update()
     {
@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
             return true;
         return false;
     }
-
-    
 
     private void OnTriggerEnter(Collider other)
     {

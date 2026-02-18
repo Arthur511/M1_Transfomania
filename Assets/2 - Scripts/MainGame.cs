@@ -9,6 +9,9 @@ public class MainGame : MonoBehaviour
     public static MainGame Instance;
     public PlayerController PlayerController => _playerController;
     public LevelManager LevelManager => _levelManager;
+    public CameraFollow CameraFollow => _cameraFollow;
+    public LayerMask BoxLayer => _boxLayer; 
+    public Button HideButton => _hideButton.GetComponent<Button>();
 
     [Header("References")]
     [SerializeField] CameraFollow _cameraFollow;
@@ -17,11 +20,10 @@ public class MainGame : MonoBehaviour
     [Header("Variables")]
     [SerializeField] LayerMask _boxLayer;
     [SerializeField] GameObject _hideButton;
-    //[SerializeField] GameObject _player;
 
-    bool _isPlayerMoving = false;
-    bool _isCameraMoving = false;
-    Vector3 _targetPosition;
+    //bool _isPlayerMoving = false;
+    //bool _isCameraMoving = false;
+    //Vector3 _targetPosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,13 +40,13 @@ public class MainGame : MonoBehaviour
     void Update()
     {
         //if (Level_State.PlayerTurn)
-        OnClick();
+        //OnClick();
 
     }
 
     private void FixedUpdate()
     {
-        if (_isPlayerMoving)
+        /*if (_isPlayerMoving)
         {
 
             _playerController.MoveCharacter(_targetPosition);
@@ -61,10 +63,10 @@ public class MainGame : MonoBehaviour
             _cameraFollow.CameraMovement(_targetPosition);
             if ((_cameraFollow.transform.position - _targetPosition + _cameraFollow.Offset).sqrMagnitude < 0.01f)
                 _isCameraMoving = false;
-        }
+        }*/
     }
 
-    private void OnClick()
+    /*private void OnClick()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -87,7 +89,7 @@ public class MainGame : MonoBehaviour
 
                         _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(_playerController);
                         _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(_playerController));
-                        
+
                         _levelManager.ClearMatOnCases();
                     }
 
@@ -103,11 +105,13 @@ public class MainGame : MonoBehaviour
             _playerController.IsHiding = !_playerController.IsHiding;
             _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
         }
-    }
+    }*/
     public void HidePlayer()
     {
         _playerController.IsHiding = !_playerController.IsHiding;
         _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
+        HideButton.interactable = false;
+        LevelManager.NextTurn();
     }
 
 }
