@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
     public BaseStateChoices NPC_BaseState;
     public int[,] DistanceFromPlayer { get; set; }
     public Case[,] Map => _map;
+    public Vector2Int[] NeighborDirection => _neighborDirection;
+    public List<ChildNPC> Children => _children;
 
 
     [SerializeField] private TextAsset _maping;
@@ -25,6 +27,7 @@ public class LevelManager : MonoBehaviour
     [Header("Case's Materials")]
     [SerializeField] private Material _caseMat;
     [SerializeField] private Material _accessCaseMat;
+    [SerializeField] List<ChildNPC> _children;
 
 
     private Case[,] _map;
@@ -225,7 +228,7 @@ public class LevelManager : MonoBehaviour
     {
         if (StateMachine.CurrentState is Level_State_PlayerTurn)
             StateMachine.SwitchState(new Level_State_AITurn(this));
-        else if(StateMachine.CurrentState is Level_State_AITurn)
+        else if (StateMachine.CurrentState is Level_State_AITurn)
             StateMachine.SwitchState(new Level_State_PlayerTurn(this));
 
         _currentTurn++;

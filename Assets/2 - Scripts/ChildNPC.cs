@@ -3,10 +3,13 @@ using UnityEngine;
 public class ChildNPC : MonoBehaviour
 {
 
+    public Vector2Int CurrentPosition { get; set; }
+    public bool IsAIMoving { get; set; }
+    public Vector3 TargetPosition { get; set; }
 
-    Vector2Int _startPosition;
-    Vector2Int _currentPosition;
+    [SerializeField] float _speedChild;
 
+    [SerializeField] Vector2Int _startPosition;
     Vector2Int[] _neighborDirection = new Vector2Int[]
     {
         new Vector2Int(1, 0),
@@ -15,19 +18,19 @@ public class ChildNPC : MonoBehaviour
         new Vector2Int(0, -1)
     };
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        transform.position = MainGame.Instance.LevelManager.Map[_startPosition.x, _startPosition.y].transform.position;
+        CurrentPosition = _startPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveCharacter(Vector3 targetPos)
     {
-        
+        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), _speedChild * Time.deltaTime);
     }
-
-    public void FindBestCase()
+    public Vector2Int FindBestCase()
     {
 
         Case[,] map = MainGame.Instance.LevelManager.Map;
@@ -35,13 +38,15 @@ public class ChildNPC : MonoBehaviour
         Vector2Int bestPosition = new Vector2Int();
         foreach (var dir in _neighborDirection)
         {
-            var neighbor = MainGame.Instance.PlayerController.PlayerPosition + dir;
+            var neighbor = CurrentPosition + dir;
 
             if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
             { continue; }
 
             if (map[neighbor.x, neighbor.y] != null)
             {
+                if (MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y] == 0)
+                    { continue; }
                 if (lessDistance > MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y])
                 {
                     lessDistance = MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y];
@@ -49,6 +54,7 @@ public class ChildNPC : MonoBehaviour
                 }
             }
         }
+        return bestPosition;
     }
 
     private void OnTriggerEnter(Collider other)

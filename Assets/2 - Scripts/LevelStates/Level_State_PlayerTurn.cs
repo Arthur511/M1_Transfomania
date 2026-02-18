@@ -22,7 +22,8 @@ public class Level_State_PlayerTurn : Level_State_Base
 
     public override void UpdateState()
     {
-        OnClick();
+        if (!_isPlayerMoving)
+            OnClick();
     }
 
     public override void FixedUpdateState()
@@ -73,6 +74,7 @@ public class Level_State_PlayerTurn : Level_State_Base
                     clickPos = hit.transform.GetComponent<Case>().CasePosition;
                     if (main.PlayerController.CanMoveAtPosition(clickPos))
                     {
+                        main.HideButton.interactable = false;
                         _isPlayerMoving = true;
                         _isCameraMoving = true;
                         _targetPosition = hit.transform.position;
