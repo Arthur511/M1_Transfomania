@@ -7,20 +7,20 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator PlayerAnimator;
     public Vector2Int PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
     public bool IsHiding { get; set; }
-    public GameObject HideButton => _hideButton;
+    //public GameObject HideButton => _hideButton;
     public int BoxPositionX => _boxPositionX;
     public int BoxPositionZ => _boxPositionZ;
 
     [UnityEngine.Range(5f, 10f)]
     [SerializeField] float _speedPlayerMove;
     [SerializeField] LayerMask _lollipopLayer;
-
     int _boxPositionX;
     int _boxPositionZ;
     Vector2Int _playerPosition;
-    [SerializeField] GameObject _hideButton;
+    //[SerializeField] GameObject _hideButton;
     int _lollipopCount = 0;
 
     public void Update()
