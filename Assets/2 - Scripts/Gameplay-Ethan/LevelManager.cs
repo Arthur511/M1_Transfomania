@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
+using static CaseTypeData;
+using static UnityEngine.EventSystems.EventTrigger;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -32,6 +32,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private List<BaseNPC> _children;
 
+    [SerializeField] private GameObject _lolypopPrefab;
+    public List<GameObject> Lolypops => _lolypops;
+    [SerializeField] private List<GameObject> _lolypops;
+
+
 
     private Case[,] _map;
     Vector2Int[] _neighborDirection = new Vector2Int[]
@@ -48,10 +53,16 @@ public class LevelManager : MonoBehaviour
     private Dictionary<BaseStateChoices, Action> _stateAction;
     private int _currentTurn = 0;
 
+    private Dictionary<TypeOfCases, Action<int, int, Vector3, CaseTypeData>> _caseInstAction;
+
+
+    [SerializeField] private GameObject _levelCasesPocket;
+
 
     private void Awake()
     {
         StateMachine = new Level_StateManager();
+        InitCaseInstAction();
         GenerateLevel();
         InitStateAction();
         SetBaseState();
@@ -91,29 +102,16 @@ public class LevelManager : MonoBehaviour
 
                 if (casesEntitesDict.ContainsKey(character))
                 {
-                    GameObject gObj = Instantiate(casesEntitesDict[character].Prefab, new Vector3(x * _caseSize.x, 0, y * -_caseSize.z), Quaternion.identity);
-                    gObj.transform.localScale = _caseSize;
-                    _map[x, y] = gObj.GetComponent<Case>();
-                    _map[x, y].CasePosition = new Vector2Int(x, y);
-
-                    if (casesEntitesDict[character].CaseType == CaseTypeData.TypeOfCases.Spawn)
+                    CaseTypeData data = casesEntitesDict[character];
+                    if (_caseInstAction.TryGetValue(data.CaseType, out Action<int, int, Vector3, CaseTypeData> action))
                     {
-                        MainGame.Instance.PlayerController.transform.position = gObj.transform.position + new Vector3(0, 1, 0);
-                        MainGame.Instance.PlayerController.PlayerPosition = new Vector2Int(x, y);
-                    }
-
-                    if (casesEntitesDict[character].CaseType == CaseTypeData.TypeOfCases.SpawnEnemies)
-                    {
-                        GameObject Enemy = Instantiate(_enemyPrefab);
-                        BaseNPC npcController = Enemy.GetComponent<BaseNPC>();
-                        npcController.Initialize(new Vector2Int(x, y), gObj.transform.position + new Vector3(0, 1, 0));
-                        _children.Add(npcController);
+                        Vector3 pos = new Vector3(x * _caseSize.x, 0, y * -_caseSize.z);
+                        action(x, y, pos, data);
                     }
                 }
             }
         }
     }
-
 
 
     private void InitStateAction()
@@ -125,6 +123,60 @@ public class LevelManager : MonoBehaviour
             {BaseStateChoices.AITurn,() => StateMachine.Initialize(new Level_State_AITurn (this))},
         };
     }
+
+
+
+    private void InitCaseInstAction()
+    {
+        _caseInstAction = new Dictionary<TypeOfCases, Action<int, int, Vector3, CaseTypeData>>
+        {
+            {TypeOfCases.Walkable, (x, y , pos, data) => InitWalkableCase(x, y, pos, data)},
+            {TypeOfCases.Spawn,(x, y , pos, data) => InitSpawnCase(x, y, pos, data)},
+            {TypeOfCases.SpawnEnemies,(x, y , pos, data) => InitSpawnEnemies(x, y, pos, data)},
+            {TypeOfCases.Lolipop,(x, y , pos, data) => InitLolypop(x, y, pos, data)},
+            {TypeOfCases.Exit,(x, y , pos, data) => InitExit(x, y, pos, data)},
+        };
+    }
+
+
+    private void InitWalkableCase(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    {
+        GameObject gObj = Instantiate(caseDatas.Prefab, pos, Quaternion.identity, _levelCasesPocket.transform);
+        gObj.transform.localScale = _caseSize;
+        _map[x, y] = gObj.GetComponent<Case>();
+        _map[x, y].CasePosition = new Vector2Int(x, y);
+    }
+
+    private void InitSpawnCase(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    {
+        InitWalkableCase(x, y, pos, caseDatas);
+        MainGame.Instance.PlayerController.transform.position = pos + new Vector3(0, 1, 0);
+        MainGame.Instance.PlayerController.PlayerPosition = new Vector2Int(x, y);
+    }
+
+    private void InitSpawnEnemies(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    {
+        InitWalkableCase(x, y, pos, caseDatas);
+        GameObject enemy = Instantiate(_enemyPrefab);
+        BaseNPC npcController = enemy.GetComponent<BaseNPC>();
+        npcController.Initialize(new Vector2Int(x, y), pos + new Vector3(0, 1, 0));
+        _children.Add(npcController);
+    }
+
+    private void InitLolypop(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    {
+        InitWalkableCase(x, y, pos, caseDatas);
+        GameObject lolypop = Instantiate(_lolypopPrefab, pos + new Vector3(0, 1, 0), Quaternion.identity);
+        _lolypops.Add(lolypop);
+    }
+
+    private void InitExit(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    {
+        InitWalkableCase(x, y, pos, caseDatas);
+    }
+
+
+
     private void SetBaseState()
     {
         /*
