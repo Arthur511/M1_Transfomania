@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -18,7 +19,7 @@ public class LevelManager : MonoBehaviour
     public int[,] DistanceFromPlayer { get; set; }
     public Case[,] Map => _map;
     public Vector2Int[] NeighborDirection => _neighborDirection;
-    public List<ChildNPC> Children => _children;
+    public List<BaseNPC> Children => _children;
 
 
     [SerializeField] private TextAsset _maping;
@@ -27,7 +28,9 @@ public class LevelManager : MonoBehaviour
     [Header("Case's Materials")]
     [SerializeField] private Material _caseMat;
     [SerializeField] private Material _accessCaseMat;
-    [SerializeField] List<ChildNPC> _children;
+
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private List<BaseNPC> _children;
 
 
     private Case[,] _map;
@@ -97,6 +100,14 @@ public class LevelManager : MonoBehaviour
                     {
                         MainGame.Instance.PlayerController.transform.position = gObj.transform.position + new Vector3(0, 1, 0);
                         MainGame.Instance.PlayerController.PlayerPosition = new Vector2Int(x, y);
+                    }
+
+                    if (casesEntitesDict[character].CaseType == CaseTypeData.TypeOfCases.SpawnEnemies)
+                    {
+                        GameObject Enemy = Instantiate(_enemyPrefab);
+                        BaseNPC npcController = Enemy.GetComponent<BaseNPC>();
+                        npcController.Initialize(new Vector2Int(x, y), gObj.transform.position + new Vector3(0, 1, 0));
+                        _children.Add(npcController);
                     }
                 }
             }

@@ -12,6 +12,7 @@ public class CaseTypeData
     {
         Walkable,
         Spawn,
+        SpawnEnemies,
         Broken,
         OnlyPlayer,
         OnlyEnemies,

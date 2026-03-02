@@ -16,10 +16,10 @@ public class BaseNPC : MonoBehaviour
         new Vector2Int(0, -1)
     };
 
-    public void Start()
+    public void Initialize(Vector2Int instPositionMap, Vector3 instPositionWorld)
     {
-        transform.position = MainGame.Instance.LevelManager.Map[_startPosition.x, _startPosition.y].transform.position;
-        CurrentPosition = _startPosition;
+        transform.position = MainGame.Instance.LevelManager.Map[instPositionMap.x, instPositionMap.y].transform.position;
+        CurrentPosition = instPositionMap;
     }
 
     public void MoveCharacter(Vector3 targetPos)
@@ -29,6 +29,9 @@ public class BaseNPC : MonoBehaviour
 
     public virtual Vector2Int FindBestCase()
     {
+        if (MainGame.Instance.LevelManager.DistanceFromPlayer[CurrentPosition.x, CurrentPosition.y] == 0)
+            return CurrentPosition;
+
         Case[,] map = MainGame.Instance.LevelManager.Map;
         int lessDistance = int.MaxValue;
         Vector2Int bestPosition = new Vector2Int();
@@ -41,9 +44,12 @@ public class BaseNPC : MonoBehaviour
 
             if (map[neighbor.x, neighbor.y] != null)
             {
-                if (MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y] == 0)
-                { continue; }
 
+                if (MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y] == 0)
+                {
+                    bestPosition = neighbor;
+                    return bestPosition;
+                }
                 if (lessDistance > MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y])
                 {
                     lessDistance = MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y];
