@@ -134,7 +134,7 @@ public class LevelManager : MonoBehaviour
             {TypeOfCases.Spawn,(x, y , pos, data) => InitSpawnCase(x, y, pos, data)},
             {TypeOfCases.SpawnEnemies,(x, y , pos, data) => InitSpawnEnemies(x, y, pos, data)},
             {TypeOfCases.Lolipop,(x, y , pos, data) => InitLolypop(x, y, pos, data)},
-            {TypeOfCases.Exit,(x, y , pos, data) => InitExit(x, y, pos, data)},
+            {TypeOfCases.Door,(x, y , pos, data) => InitDoor(x, y, pos, data)},
         };
     }
 
@@ -170,7 +170,7 @@ public class LevelManager : MonoBehaviour
         _lolypops.Add(lolypop);
     }
 
-    private void InitExit(int x, int y, Vector3 pos, CaseTypeData caseDatas)
+    private void InitDoor(int x, int y, Vector3 pos, CaseTypeData caseDatas)
     {
         InitWalkableCase(x, y, pos, caseDatas);
     }

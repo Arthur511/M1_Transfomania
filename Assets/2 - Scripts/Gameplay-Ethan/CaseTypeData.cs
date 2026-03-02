@@ -14,6 +14,6 @@ public class CaseTypeData
         Spawn,
         SpawnEnemies,
         Lolipop,
-        Exit
+        Door
     }
 }
