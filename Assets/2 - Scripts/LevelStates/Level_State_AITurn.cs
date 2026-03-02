@@ -2,6 +2,8 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class Level_State_AITurn : Level_State_Base
 {
@@ -15,7 +17,14 @@ public class Level_State_AITurn : Level_State_Base
         foreach (ChildNPC child in main.LevelManager.Children)
         {
             child.CurrentPosition = child.FindBestCase();
-            child.TargetPosition = main.LevelManager.Map[child.FindBestCase().x, child.FindBestCase().y].transform.position;
+            child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
+            
+            Debug.Log($"npc : {child.CurrentPosition}, player : {MainGame.Instance.PlayerController.PlayerPosition}");
+            if (child.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
+            {
+                SceneManager.LoadScene("Scene_Arthur2");
+            }
+
             child.IsAIMoving = true;
         }
 #if UNITY_EDITOR
