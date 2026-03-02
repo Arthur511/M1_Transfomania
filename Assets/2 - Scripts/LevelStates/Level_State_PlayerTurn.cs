@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Level_State_PlayerTurn : Level_State_Base
@@ -60,35 +61,80 @@ public class Level_State_PlayerTurn : Level_State_Base
     private void OnClick()
     {
         MainGame main = MainGame.Instance;
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        /* #region PC_INTERACTION
+         if (Mouse.current.leftButton.wasPressedThisFrame)
+         {
+             RaycastHit hit;
+             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+             if (Physics.Raycast(ray, out hit))
+             {
+                 if (1 << hit.collider.gameObject.layer == main.BoxLayer.value)
+                 {
+                     Vector2Int clickPos;
+                     if (hit.transform.GetComponent<Case>() == null)
+                         return;
+                     clickPos = hit.transform.GetComponent<Case>().CasePosition;
+                     if (main.PlayerController.CanMoveAtPosition(clickPos))
+                     {
+                         main.HideButton.interactable = false;
+                         _isPlayerMoving = true;
+                         _isCameraMoving = true;
+                         _targetPosition = hit.transform.position;
+                         main.PlayerController.PlayerPosition = clickPos;
+
+                         _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(main.PlayerController);
+                         _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(main.PlayerController));
+
+                         _levelManager.ClearMatOnCases();
+                     }
+
+                 }
+             }
+         }
+         #endregion*/
+
+        #region MOBILE_INTERACTION
+
+        if (Input.touchCount > 0)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out hit))
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == UnityEngine.TouchPhase.Began)
             {
-                if (1 << hit.collider.gameObject.layer == main.BoxLayer.value)
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    return;
+                Camera.main.backgroundColor = Color.red;
+                RaycastHit hit;
+                Ray ray = main.CameraFollow.gameObject.GetComponent<Camera>().ScreenPointToRay(touch.position);
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Vector2Int clickPos;
-                    if (hit.transform.GetComponent<Case>() == null)
-                        return;
-                    clickPos = hit.transform.GetComponent<Case>().CasePosition;
-                    if (main.PlayerController.CanMoveAtPosition(clickPos))
+                    Camera.main.backgroundColor = Color.blue;
+                    Debug.Log("Raycast a touché : " + hit.collider.name);
+                    if (((1 << hit.collider.gameObject.layer) & main.BoxLayer.value) != 0)
                     {
-                        main.HideButton.interactable = false;
-                        _isPlayerMoving = true;
-                        _isCameraMoving = true;
-                        _targetPosition = hit.transform.position;
-                        main.PlayerController.PlayerPosition = clickPos;
+                        Camera.main.backgroundColor = Color.green;
+                        Vector2Int clickPos;
+                        if (hit.transform.GetComponent<Case>() == null)
+                            return;
+                        clickPos = hit.transform.GetComponent<Case>().CasePosition;
+                        if (main.PlayerController.CanMoveAtPosition(clickPos))
+                        {
+                            main.HideButton.interactable = false;
+                            _isPlayerMoving = true;
+                            _isCameraMoving = true;
+                            _targetPosition = hit.transform.position;
+                            main.PlayerController.PlayerPosition = clickPos;
 
-                        _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(main.PlayerController);
-                        _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(main.PlayerController));
+                            _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(main.PlayerController);
+                            _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(main.PlayerController));
 
-                        _levelManager.ClearMatOnCases();
+                            _levelManager.ClearMatOnCases();
+                        }
+
                     }
-
                 }
             }
         }
+        #endregion
     }
 
     /*public void HidePlayer()

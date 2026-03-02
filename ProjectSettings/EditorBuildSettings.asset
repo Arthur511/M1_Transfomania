@@ -8,13 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1 - Scenes/Main scenes/MainMenu.unity
     guid: a2bcd324e385bbc45bef17108787cb37
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 - Scenes/Main scenes/Game.unity
     guid: bf6f11e0282c0044fa4091c7787b9da9
   - enabled: 1
     path: Assets/1 - Scenes/Scenes GP/Scene_Arthur2.unity
     guid: 5311861c465920044909b6e8a29afc26
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 96a990d4325002d4baf2d2a815a7626b, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 4a3265ccfe84e5c49ab21008de471ae6, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: be0cb63ea05bd864da27928f9fc269c4, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
