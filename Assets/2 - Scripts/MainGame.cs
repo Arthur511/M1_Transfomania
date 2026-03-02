@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
     }
     private void Start()
     {
