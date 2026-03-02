@@ -103,6 +103,7 @@ public class LevelManager : MonoBehaviour
                 if (casesEntitesDict.ContainsKey(character))
                 {
                     CaseTypeData data = casesEntitesDict[character];
+                    Debug.Log(data);
                     if (_caseInstAction.TryGetValue(data.CaseType, out Action<int, int, Vector3, CaseTypeData> action))
                     {
                         Vector3 pos = new Vector3(x * _caseSize.x, 0, y * -_caseSize.z);
