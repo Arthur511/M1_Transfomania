@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -95,23 +97,25 @@ public class Level_State_PlayerTurn : Level_State_Base
 
         #region MOBILE_INTERACTION
 
-        if (Input.touchCount > 0)
+        //Debug.Log("CLLLLIIIIICCCCCCKKKKKK !!!");
+        if (Touchscreen.current != null)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == UnityEngine.TouchPhase.Began)
+            //Debug.Log("Touch !!!");
+            //Touch touch = Input.GetTouch(0);
+            if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                    return;
-                Camera.main.backgroundColor = Color.red;
+                Debug.Log("Touch start !!!");
+
+                /*if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    return;*/
                 RaycastHit hit;
-                Ray ray = main.CameraFollow.gameObject.GetComponent<Camera>().ScreenPointToRay(touch.position);
+                Ray ray = main.CameraFollow.gameObject.GetComponent<Camera>().ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Camera.main.backgroundColor = Color.blue;
-                    Debug.Log("Raycast a touché : " + hit.collider.name);
+                    Debug.Log("Touch something !!!");
                     if (((1 << hit.collider.gameObject.layer) & main.BoxLayer.value) != 0)
                     {
-                        Camera.main.backgroundColor = Color.green;
+                        Debug.Log("Touch cell !!!");
                         Vector2Int clickPos;
                         if (hit.transform.GetComponent<Case>() == null)
                             return;
