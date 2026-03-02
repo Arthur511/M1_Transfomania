@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 160103874}
   - component: {fileID: 160103873}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TXT_Cinematic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -922,8 +922,12 @@ MonoBehaviour:
   - Char: 83
     Prefab: {fileID: 566532896}
     CaseType: 1
+  - Char: 69
+    Prefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
+    CaseType: 2
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
+  _enemyPrefab: {fileID: 0}
   _children: []
 --- !u!114 &785705247
 MonoBehaviour:
@@ -945,7 +949,7 @@ MonoBehaviour:
   thumbnailswapped: {fileID: 2100000, guid: 7f37a460ba329e247b2e01754081a2c7, type: 2}
   introtxt:
   - "O\xF9 es-tu ?"
-  - "Peut-\xEAtre dans une autre pi\xE8ce ?"
+  - "Dans une autre pi\xE8ce ?"
   - Attention aux autres enfants !
   asset: {fileID: 160103873}
   time_before_next_txt: 2
