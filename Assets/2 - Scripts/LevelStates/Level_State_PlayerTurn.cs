@@ -46,8 +46,8 @@ public class Level_State_PlayerTurn : Level_State_Base
 
         if (_isCameraMoving)
         {
-            main.CameraFollow.SetCurrentOffset(main.PlayerController);
-            main.CameraFollow.CameraMovement(_targetPosition);
+            //main.CameraFollow.SetCurrentOffset(main.PlayerController);
+            //main.CameraFollow.CameraMovement(_targetPosition);
             if ((main.CameraFollow.transform.position - _targetPosition + main.CameraFollow.Offset).sqrMagnitude < 0.01f)
                 _isCameraMoving = false;
         }
