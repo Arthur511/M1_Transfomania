@@ -37,6 +37,7 @@ public class Level_State_PlayerTurn : Level_State_Base
             main.PlayerController.MoveCharacter(_targetPosition);
             if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
             {
+                Debug.Log("OK ARRIVED");
                 main.LevelManager.NextTurn();
                 _isPlayerMoving = false;
                 _levelManager.CanPlayerMoveTo();
@@ -128,8 +129,8 @@ public class Level_State_PlayerTurn : Level_State_Base
                             _targetPosition = hit.transform.position;
                             main.PlayerController.PlayerPosition = clickPos;
 
-                            _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(main.PlayerController);
-                            _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(main.PlayerController));
+                            _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromPlayer(main.PlayerController);
+                            _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromPlayer(main.PlayerController));
 
                             _levelManager.ClearMatOnCases();
                         }

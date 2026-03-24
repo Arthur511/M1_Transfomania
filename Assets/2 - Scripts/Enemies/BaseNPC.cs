@@ -3,6 +3,7 @@ using UnityEngine;
 public class BaseNPC : MonoBehaviour
 {
     public Vector2Int CurrentPosition { get; set; }
+    public Vector2Int StartPosition { get; set; }
     public bool IsAIMoving { get; set; }
     public Vector3 TargetPosition { get; set; }
     [SerializeField] float _speedChild;

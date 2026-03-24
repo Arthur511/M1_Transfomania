@@ -210,7 +210,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public int[,] CalculateDistanceFromCase(PlayerController player)
+    public int[,] CalculateDistanceFromPlayer(PlayerController player)
     {
         int[,] values = new int[_map.GetLength(0), _map.GetLength(1)];
         Queue<Vector2Int> posCases = new Queue<Vector2Int>();

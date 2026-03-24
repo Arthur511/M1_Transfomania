@@ -49,66 +49,8 @@ public class MainGame : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*if (_isPlayerMoving)
-        {
-
-            _playerController.MoveCharacter(_targetPosition);
-            if ((_playerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
-            {
-                _isPlayerMoving = false;
-                _levelManager.CanPlayerMoveTo();
-            }
-        }
-
-        if (_isCameraMoving)
-        {
-            _cameraFollow.SetCurrentOffset(_playerController);
-            _cameraFollow.CameraMovement(_targetPosition);
-            if ((_cameraFollow.transform.position - _targetPosition + _cameraFollow.Offset).sqrMagnitude < 0.01f)
-                _isCameraMoving = false;
-        }*/
+       
     }
-
-    /*private void OnClick()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (1 << hit.collider.gameObject.layer == _boxLayer.value)
-                {
-                    Vector2Int clickPos;
-                    if (hit.transform.GetComponent<Case>() == null)
-                        return;
-                    clickPos = hit.transform.GetComponent<Case>().CasePosition;
-                    if (_playerController.CanMoveAtPosition(clickPos))
-                    {
-                        _isPlayerMoving = true;
-                        _isCameraMoving = true;
-                        _targetPosition = hit.transform.position;
-                        _playerController.PlayerPosition = clickPos;
-
-                        _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(_playerController);
-                        _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(_playerController));
-
-                        _levelManager.ClearMatOnCases();
-                    }
-
-                }
-            }
-        }
-    }
-
-    public void HidePlayer(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            _playerController.IsHiding = !_playerController.IsHiding;
-            _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
-        }
-    }*/
     public void HidePlayer()
     {
         _playerController.IsHiding = !_playerController.IsHiding;
