@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> Lolypops => _lolypops;
     [SerializeField] private List<GameObject> _lolypops;
 
-
+    public Vector3 GridCenter { get; private set; }
 
     private Case[,] _map;
     Vector2Int[] _neighborDirection = new Vector2Int[]
@@ -111,8 +111,14 @@ public class LevelManager : MonoBehaviour
                     }
                 }
             }
+
+            float centerX = (_map.GetLength(0) - 1) * _caseSize.x / 2f;
+            float centerZ = (_map.GetLength(1) - 1) * -_caseSize.z / 2f;
+
+            GridCenter = new Vector3(centerX, 0, centerZ);
         }
     }
+
 
 
     private void InitStateAction()

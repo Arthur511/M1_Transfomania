@@ -10,12 +10,12 @@ public class MainGame : MonoBehaviour
     public static MainGame Instance;
     public PlayerController PlayerController => _playerController;
     public LevelManager LevelManager => _levelManager;
-    public CameraFollow CameraFollow => _cameraFollow;
+    public New_CameraFollow CameraFollow => _cameraFollow;
     public LayerMask BoxLayer => _boxLayer; 
     public Button HideButton => _hideButton.GetComponent<Button>();
 
     [Header("References")]
-    [SerializeField] CameraFollow _cameraFollow;
+    [SerializeField] New_CameraFollow _cameraFollow;
     [SerializeField] PlayerController _playerController;
     [SerializeField] LevelManager _levelManager;
     [SerializeField] AnimatorManager _animatorManager;
@@ -36,7 +36,7 @@ public class MainGame : MonoBehaviour
     }
     private void Start()
     {
-        _cameraFollow.gameObject.transform.position = _playerController.transform.position + (_cameraFollow.LevelCenter.position - _playerController.transform.position) / 2 + _cameraFollow.Offset;
+        //_cameraFollow.gameObject.transform.position = _playerController.transform.position + (_cameraFollow.LevelCenter.position - _playerController.transform.position) / 2 + _cameraFollow.Offset;
         _levelManager.CanPlayerMoveTo();
     }
     // Update is called once per frame
