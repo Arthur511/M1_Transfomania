@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseNPC : MonoBehaviour
@@ -16,21 +17,43 @@ public class BaseNPC : MonoBehaviour
         new Vector2Int(0, 1),
         new Vector2Int(0, -1)
     };
+    public Vector2Int[] GetNeighborDirection() {  return _neighborDirection; }
 
 
     protected void Awake()
     {
-        StateMachine = new NPC_StateManager(new NPC_State_Chase(this));
+        StateMachine = new NPC_StateManager(new NPC_State_Wait(this));
+    }
+
+    protected void Update()
+    {
+#if UNITY_EDITOR
+        Debug.Log($"Current AI state : {StateMachine.CurrentState.ToString()}");
+#endif
+
+        StateMachine.CurrentState.UpdateState();
+    }
+
+    protected void FixedUpdate()
+    {
+        StateMachine.CurrentState.FixedUpdateState();
+
     }
 
 
+
     public NPC_StateManager StateMachine { get; private set; }
+    public List<Vector2Int> PathToFollow { get; set; } = new List<Vector2Int>();
+    public int PathIndex { get; set; } = 0;
+
 
 
     public void Initialize(Vector2Int instPositionMap, Vector3 instPositionWorld)
     {
         transform.position = MainGame.Instance.LevelManager.Map[instPositionMap.x, instPositionMap.y].transform.position;
         CurrentPosition = instPositionMap;
+
+        StartPosition = instPositionMap;
     }
 
     public void MoveCharacter(Vector3 targetPos)

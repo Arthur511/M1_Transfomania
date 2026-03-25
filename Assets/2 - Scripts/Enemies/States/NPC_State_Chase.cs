@@ -16,57 +16,16 @@ public class NPC_State_Chase : NPC_State_Base
             SceneManager.LoadScene("Scene_Arthur2");
         }
 
-        if (MainGame.Instance.PlayerController.IsHiding)
-        {
-            /*
-            _npc.PathToFollow = BuildPathToStart(child);
-            _npc.PathIndex = 0;
-            */
-        }
-
         _npc.IsAIMoving = true;
     }
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void FixedUpdateState()
     {
-        /*
-        if (MainGame.Instance.PlayerController.IsHiding)
-        {
-
-            foreach (ChildNPC child in main.LevelManager.Children)
-            {
-                if (!child.IsAIMoving) continue;
-                if (child.PathIndex >= child.PathToFollow.Count)
-                {
-                    child.IsAIMoving = false;
-                    continue;
-                }
-                Vector2Int targetCell = child.PathToFollow[child.PathIndex];
-                Vector3 targetPos = MainGame.Instance.LevelManager.Map[targetCell.x, targetCell.y].transform.position;
-
-                child.MoveCharacter(targetPos);
-                if ((child.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f)
-                {
-                    child.transform.position = targetPos;
-                    child.CurrentPosition = targetCell;
-                    child.PathIndex++;
-
-                    if (child.PathIndex >= child.PathToFollow.Count)
-                    {
-                        child.IsAIMoving = false;
-                    }
-                }
-            }
-        }
-        */
-
-
-
         if (_npc.IsAIMoving)
         {
             _npc.MoveCharacter(_npc.TargetPosition);
@@ -81,6 +40,6 @@ public class NPC_State_Chase : NPC_State_Base
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

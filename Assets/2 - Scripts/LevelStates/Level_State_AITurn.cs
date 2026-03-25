@@ -12,13 +12,13 @@ public class Level_State_AITurn : Level_State_Base
 
     MainGame main;
 
-    Vector2Int[] _neighborDirection = new Vector2Int[]
-    {
-        new Vector2Int(1, 0),
-        new Vector2Int(-1, 0),
-        new Vector2Int(0, 1),
-        new Vector2Int(0, -1)
-    };
+    //Vector2Int[] _neighborDirection = new Vector2Int[]
+    //{
+    //    new Vector2Int(1, 0),
+    //    new Vector2Int(-1, 0),
+    //    new Vector2Int(0, 1),
+    //    new Vector2Int(0, -1)
+    //};
 
     int[,] DistanceFromStartPosition { get; set; }
 
@@ -30,19 +30,25 @@ public class Level_State_AITurn : Level_State_Base
         main = MainGame.Instance;
         foreach (ChildNPC child in main.LevelManager.Children)
         {
-            child.CurrentPosition = child.FindBestCase();
-            child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
+            //child.CurrentPosition = child.FindBestCase();
+            //child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
 
             //Debug.Log($"npc : {child.CurrentPosition}, player : {MainGame.Instance.PlayerController.PlayerPosition}");
-            if (child.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
-            {
-                SceneManager.LoadScene("Scene_Arthur2");
-            }
+            //if (child.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
+            //{
+            //    SceneManager.LoadScene("Scene_Arthur2");
+            //}
 
             if (MainGame.Instance.PlayerController.IsHiding)
             {
-                child.PathToFollow = BuildPathToStart(child);
-                child.PathIndex = 0;
+                //child.PathToFollow = BuildPathToStart(child);
+                //child.PathIndex = 0;
+                child.StateMachine.SwitchState(new NPC_State_GoBack(child));
+            }
+            else
+            {
+                child.StateMachine.SwitchState(new NPC_State_Chase(child));
+
             }
 
             child.IsAIMoving = true;
@@ -69,36 +75,36 @@ public class Level_State_AITurn : Level_State_Base
 #endif
 
 
-        if (MainGame.Instance.PlayerController.IsHiding)
-        {
+        //if (MainGame.Instance.PlayerController.IsHiding)
+        //{
 
-            foreach (ChildNPC child in main.LevelManager.Children)
-            {
-                if (!child.IsAIMoving) continue;
-                if (child.PathIndex >= child.PathToFollow.Count)
-                {
-                    child.IsAIMoving = false;
-                    continue;
-                }
-                Vector2Int targetCell = child.PathToFollow[child.PathIndex];
-                Vector3 targetPos = MainGame.Instance.LevelManager.Map[targetCell.x, targetCell.y].transform.position;
+            //foreach (ChildNPC child in main.LevelManager.Children)
+            //{
+            //    if (!child.IsAIMoving) continue;
+            //    if (child.PathIndex >= child.PathToFollow.Count)
+            //    {
+            //        child.IsAIMoving = false;
+            //        continue;
+            //    }
+            //    Vector2Int targetCell = child.PathToFollow[child.PathIndex];
+            //    Vector3 targetPos = MainGame.Instance.LevelManager.Map[targetCell.x, targetCell.y].transform.position;
 
-                child.MoveCharacter(targetPos);
-                if ((child.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f)
-                {
-                    child.transform.position = targetPos;
-                    child.CurrentPosition = targetCell;
-                    child.PathIndex++;
+            //    child.MoveCharacter(targetPos);
+            //    if ((child.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f)
+            //    {
+            //        child.transform.position = targetPos;
+            //        child.CurrentPosition = targetCell;
+            //        child.PathIndex++;
 
-                    if (child.PathIndex >= child.PathToFollow.Count)
-                    {
-                        child.IsAIMoving = false;
-                    }
-                }
-            }
-        }
-        else
-        {
+            //        if (child.PathIndex >= child.PathToFollow.Count)
+            //        {
+            //            child.IsAIMoving = false;
+            //        }
+            //    }
+            //}
+        //}
+        //else
+        //{
             /*
             foreach (ChildNPC child in main.LevelManager.Children)
             {
@@ -113,10 +119,11 @@ public class Level_State_AITurn : Level_State_Base
                 }
             }
             */
-        }
+        //}
 
 
-        if (HasAllChildrenMoved())
+        //if (HasAllChildrenMoved())
+        if (_levelManager.Count_AIFinishToMove >= _levelManager.Children.Count)
             main.LevelManager.NextTurn();
 
     }
@@ -168,77 +175,77 @@ public class Level_State_AITurn : Level_State_Base
         return true;
     }
 
-    public int[,] CalculateDistanceFromCase(Vector2Int startCase)
-    {
-        Case[,] map = MainGame.Instance.LevelManager.Map;
+    //public int[,] CalculateDistanceFromCase(Vector2Int startCase)
+    //{
+    //    Case[,] map = MainGame.Instance.LevelManager.Map;
 
-        int[,] values = new int[map.GetLength(0), map.GetLength(1)];
-        Queue<Vector2Int> posCases = new Queue<Vector2Int>();
-        bool[,] visited = new bool[map.GetLength(0), map.GetLength(1)];
+    //    int[,] values = new int[map.GetLength(0), map.GetLength(1)];
+    //    Queue<Vector2Int> posCases = new Queue<Vector2Int>();
+    //    bool[,] visited = new bool[map.GetLength(0), map.GetLength(1)];
 
-        posCases.Enqueue(startCase);
-        visited[startCase.x, startCase.y] = true;
+    //    posCases.Enqueue(startCase);
+    //    visited[startCase.x, startCase.y] = true;
 
-        while (posCases.Count > 0)
-        {
-            var currentPos = posCases.Dequeue();
-            foreach (var dir in _neighborDirection)
-            {
-                var neighbor = currentPos + dir;
+    //    while (posCases.Count > 0)
+    //    {
+    //        var currentPos = posCases.Dequeue();
+    //        foreach (var dir in _neighborDirection)
+    //        {
+    //            var neighbor = currentPos + dir;
 
-                if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
-                { continue; }
+    //            if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
+    //            { continue; }
 
-                if (visited[neighbor.x, neighbor.y])
-                { continue; }
+    //            if (visited[neighbor.x, neighbor.y])
+    //            { continue; }
 
-                if (map[neighbor.x, neighbor.y] != null)
-                {
-                    values[neighbor.x, neighbor.y] = values[currentPos.x, currentPos.y] + 1;
-                    visited[neighbor.x, neighbor.y] = true;
-                    posCases.Enqueue(neighbor);
-                }
-            }
-        }
-        return values;
-    }
+    //            if (map[neighbor.x, neighbor.y] != null)
+    //            {
+    //                values[neighbor.x, neighbor.y] = values[currentPos.x, currentPos.y] + 1;
+    //                visited[neighbor.x, neighbor.y] = true;
+    //                posCases.Enqueue(neighbor);
+    //            }
+    //        }
+    //    }
+    //    return values;
+    //}
 
-    private List<Vector2Int> BuildPathToStart(ChildNPC child)
-    {
-        var map = MainGame.Instance.LevelManager.Map;
+    //private List<Vector2Int> BuildPathToStart(ChildNPC child)
+    //{
+    //    var map = MainGame.Instance.LevelManager.Map;
 
-        int[,] dist = CalculateDistanceFromCase(child.StartPosition);
-        var path = new List<Vector2Int>();
-        Vector2Int current = child.CurrentPosition;
+    //    int[,] dist = CalculateDistanceFromCase(child.StartPosition);
+    //    var path = new List<Vector2Int>();
+    //    Vector2Int current = child.CurrentPosition;
 
-        while (current != child.StartPosition)
-        {
-            Vector2Int best = current;
-            int bestDist = dist[current.x, current.y];
+    //    while (current != child.StartPosition)
+    //    {
+    //        Vector2Int best = current;
+    //        int bestDist = dist[current.x, current.y];
 
-            foreach (var dir in _neighborDirection)
-            {
-                var neighbor = current + dir;
+    //        foreach (var dir in _neighborDirection)
+    //        {
+    //            var neighbor = current + dir;
 
-                if (neighbor.x < 0 || neighbor.y < 0 ||
-                    neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
-                    continue;
+    //            if (neighbor.x < 0 || neighbor.y < 0 ||
+    //                neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
+    //                continue;
 
-                if (map[neighbor.x, neighbor.y] != null && dist[neighbor.x, neighbor.y] < bestDist)
-                {
-                    bestDist = dist[neighbor.x, neighbor.y];
-                    best = neighbor;
-                }
-            }
+    //            if (map[neighbor.x, neighbor.y] != null && dist[neighbor.x, neighbor.y] < bestDist)
+    //            {
+    //                bestDist = dist[neighbor.x, neighbor.y];
+    //                best = neighbor;
+    //            }
+    //        }
 
-            if (best == current) break;
+    //        if (best == current) break;
 
-            path.Add(best);
-            current = best;
-        }
+    //        path.Add(best);
+    //        current = best;
+    //    }
 
-        return path;
-    }
+    //    return path;
+    //}
 
     #endregion
 

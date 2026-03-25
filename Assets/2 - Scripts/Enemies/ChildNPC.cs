@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ChildNPC : BaseNPC
 {
-    public List<Vector2Int> PathToFollow { get; set; } = new List<Vector2Int>();
-    public int PathIndex { get; set; } = 0;
+    //public List<Vector2Int> PathToFollow { get; set; } = new List<Vector2Int>();
+    //public int PathIndex { get; set; } = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
