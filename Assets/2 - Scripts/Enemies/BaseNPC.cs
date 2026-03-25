@@ -17,6 +17,16 @@ public class BaseNPC : MonoBehaviour
         new Vector2Int(0, -1)
     };
 
+
+    protected void Awake()
+    {
+        StateMachine = new NPC_StateManager(new NPC_State_Chase(this));
+    }
+
+
+    public NPC_StateManager StateMachine { get; private set; }
+
+
     public void Initialize(Vector2Int instPositionMap, Vector3 instPositionWorld)
     {
         transform.position = MainGame.Instance.LevelManager.Map[instPositionMap.x, instPositionMap.y].transform.position;
@@ -28,6 +38,8 @@ public class BaseNPC : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), _speedChild * Time.deltaTime);
     }
 
+
+    // We use children
     public virtual Vector2Int FindBestCase()
     {
         if (MainGame.Instance.LevelManager.DistanceFromPlayer[CurrentPosition.x, CurrentPosition.y] == 0)

@@ -23,6 +23,8 @@ public class Level_State_AITurn : Level_State_Base
     int[,] DistanceFromStartPosition { get; set; }
 
 
+    // New npc gestion
+
     public override void EnterState()
     {
         main = MainGame.Instance;
@@ -97,6 +99,7 @@ public class Level_State_AITurn : Level_State_Base
         }
         else
         {
+            /*
             foreach (ChildNPC child in main.LevelManager.Children)
             {
 
@@ -109,6 +112,7 @@ public class Level_State_AITurn : Level_State_Base
                     }
                 }
             }
+            */
         }
 
 

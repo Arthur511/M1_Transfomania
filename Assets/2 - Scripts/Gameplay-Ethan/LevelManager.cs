@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject _levelCasesPocket;
 
+    public int Count_AIFinishToMove = 0;
 
     private void Awake()
     {
