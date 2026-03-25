@@ -153,6 +153,7 @@ public class LevelManager : MonoBehaviour
         gObj.transform.localScale = _caseSize;
         _map[x, y] = gObj.GetComponent<Case>();
         _map[x, y].CasePosition = new Vector2Int(x, y);
+        _map[x, y].CaseTypeData = caseDatas;
     }
 
     private void InitSpawnCase(int x, int y, Vector3 pos, CaseTypeData caseDatas)
