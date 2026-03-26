@@ -50,4 +50,16 @@ public class PlayerController : MonoBehaviour
             _lollipopCount++;
         }
     }
+
+    /*
+    public void HidePlayer(bool hide)
+    {
+        MainGame mainGame = MainGame.Instance;
+        IsHiding = hide;
+        string hideTrigger = IsHiding ? "Unhiding" : "Hiding";
+        //mainGame.AnimatorManager.PlayAnimation(PlayerAnimator, hideTrigger);
+        mainGame.HideButton.GetComponentInChildren<TextMeshProUGUI>().text = IsHiding ? "Unhide" : "Hide";
+        mainGame.HideButton.interactable = false;
+    }
+    */
 }

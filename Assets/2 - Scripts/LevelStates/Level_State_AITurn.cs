@@ -22,6 +22,7 @@ public class Level_State_AITurn : Level_State_Base
 
     int[,] DistanceFromStartPosition { get; set; }
 
+    bool aaa = false;
 
     // New npc gestion
 
@@ -78,53 +79,57 @@ public class Level_State_AITurn : Level_State_Base
         //if (MainGame.Instance.PlayerController.IsHiding)
         //{
 
-            //foreach (ChildNPC child in main.LevelManager.Children)
-            //{
-            //    if (!child.IsAIMoving) continue;
-            //    if (child.PathIndex >= child.PathToFollow.Count)
-            //    {
-            //        child.IsAIMoving = false;
-            //        continue;
-            //    }
-            //    Vector2Int targetCell = child.PathToFollow[child.PathIndex];
-            //    Vector3 targetPos = MainGame.Instance.LevelManager.Map[targetCell.x, targetCell.y].transform.position;
+        //foreach (ChildNPC child in main.LevelManager.Children)
+        //{
+        //    if (!child.IsAIMoving) continue;
+        //    if (child.PathIndex >= child.PathToFollow.Count)
+        //    {
+        //        child.IsAIMoving = false;
+        //        continue;
+        //    }
+        //    Vector2Int targetCell = child.PathToFollow[child.PathIndex];
+        //    Vector3 targetPos = MainGame.Instance.LevelManager.Map[targetCell.x, targetCell.y].transform.position;
 
-            //    child.MoveCharacter(targetPos);
-            //    if ((child.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f)
-            //    {
-            //        child.transform.position = targetPos;
-            //        child.CurrentPosition = targetCell;
-            //        child.PathIndex++;
+        //    child.MoveCharacter(targetPos);
+        //    if ((child.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f)
+        //    {
+        //        child.transform.position = targetPos;
+        //        child.CurrentPosition = targetCell;
+        //        child.PathIndex++;
 
-            //        if (child.PathIndex >= child.PathToFollow.Count)
-            //        {
-            //            child.IsAIMoving = false;
-            //        }
-            //    }
-            //}
+        //        if (child.PathIndex >= child.PathToFollow.Count)
+        //        {
+        //            child.IsAIMoving = false;
+        //        }
+        //    }
+        //}
         //}
         //else
         //{
-            /*
-            foreach (ChildNPC child in main.LevelManager.Children)
-            {
+        /*
+        foreach (ChildNPC child in main.LevelManager.Children)
+        {
 
-                if (child.IsAIMoving)
+            if (child.IsAIMoving)
+            {
+                child.MoveCharacter(child.TargetPosition);
+                if ((child.gameObject.transform.position - child.TargetPosition).sqrMagnitude < 0.01f)
                 {
-                    child.MoveCharacter(child.TargetPosition);
-                    if ((child.gameObject.transform.position - child.TargetPosition).sqrMagnitude < 0.01f)
-                    {
-                        child.IsAIMoving = false;
-                    }
+                    child.IsAIMoving = false;
                 }
             }
-            */
+        }
+        */
         //}
 
 
         //if (HasAllChildrenMoved())
-        if (_levelManager.Count_AIFinishToMove >= _levelManager.Children.Count)
-            main.LevelManager.NextTurn();
+
+        if (_levelManager.Count_AIFinishToMove < _levelManager.Children.Count)
+            return;
+
+        main.HidePlayer(false);
+        main.LevelManager.NextTurn();
 
     }
 

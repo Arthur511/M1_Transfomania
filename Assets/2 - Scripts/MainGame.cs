@@ -10,6 +10,7 @@ public class MainGame : MonoBehaviour
     public static MainGame Instance;
     public PlayerController PlayerController => _playerController;
     public LevelManager LevelManager => _levelManager;
+    public AnimatorManager AnimatorManager => _animatorManager;
     public New_CameraFollow CameraFollow => _cameraFollow;
     public LayerMask BoxLayer => _boxLayer; 
     public Button HideButton => _hideButton.GetComponent<Button>();
@@ -51,14 +52,23 @@ public class MainGame : MonoBehaviour
     {
        
     }
-    public void HidePlayer()
+
+
+
+    public void ToggleHidePlayer()
     {
-        _playerController.IsHiding = !_playerController.IsHiding;
-        string hideTrigger = _playerController.IsHiding ? "Unhiding" : "Hiding";
-        _animatorManager.PlayAnimation(_playerController.PlayerAnimator, hideTrigger);
-        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = _playerController.IsHiding ? "Unhide" : "Hide";
-        HideButton.interactable = false;
+        HidePlayer(!_playerController.IsHiding);
         LevelManager.NextTurn();
     }
 
+
+    public void HidePlayer(bool hide)
+    {
+        _playerController.IsHiding = hide;
+        string hideTrigger = _playerController.IsHiding ? "Unhiding" : "Hiding";
+        _animatorManager.PlayAnimation(_playerController.PlayerAnimator, hideTrigger);
+        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hideTrigger;
+        HideButton.interactable = false;
+    }
+    
 }
