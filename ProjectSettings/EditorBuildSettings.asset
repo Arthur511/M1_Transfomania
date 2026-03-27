@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/1 - Scenes/Scenes GP/Scene_Arthur2.unity
     guid: 5311861c465920044909b6e8a29afc26
   - enabled: 1
-    path: Assets/1 - Scenes/Scenes GD/Scene_Maxime.unity
+    path: Assets/1 - Scenes/Main scenes/MainGame.unity
     guid: 854fda5c56a775a48af006c7be271c28
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 96a990d4325002d4baf2d2a815a7626b, type: 2}
