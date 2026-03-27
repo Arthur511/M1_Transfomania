@@ -96,4 +96,10 @@ public class BaseNPC : MonoBehaviour
         return bestPosition;
     }
 
+
+    public void Die()
+    {
+        MainGame.Instance.LevelManager.Ennemies.Remove(this);
+        Destroy(this.gameObject);
+    }
 }

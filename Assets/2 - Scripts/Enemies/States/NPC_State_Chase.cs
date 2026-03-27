@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,10 +11,18 @@ public class NPC_State_Chase : NPC_State_Base
     {
         _npc.CurrentPosition = _npc.FindBestCase();
         _npc.TargetPosition = MainGame.Instance.LevelManager.Map[_npc.CurrentPosition.x, _npc.CurrentPosition.y].transform.position;
-
+        
         if (_npc.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
         {
-            SceneManager.LoadScene("Scene_Arthur2");
+            if (MainGame.Instance.PlayerController.LollipopCount > 0)
+            {
+                MainGame.Instance.PlayerController.ChangeLolipopCount(false);
+                _npc.Die();
+                return;
+            }
+
+            MainGame.Instance.PlayerController.Die();
+            return;
         }
 
         _npc.IsAIMoving = true;

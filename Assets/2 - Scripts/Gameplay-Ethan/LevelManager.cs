@@ -372,6 +372,13 @@ public class LevelManager : MonoBehaviour
         _maping = newMapData;
         GenerateLevel();
         CanPlayerMoveTo();
+        MainGame.Instance.PlayerController.ChangeLolipopCount(0);
         StateMachine.SwitchState(new Level_State_PlayerTurn(this));
+    }
+
+
+    public void OnPlayerDie()
+    {
+        MainGame.Instance.OnPlayerDie();
     }
 }

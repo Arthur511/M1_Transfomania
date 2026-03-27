@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     int _boxPositionZ;
     Vector2Int _playerPosition;
     //[SerializeField] GameObject _hideButton;
+    public int LollipopCount => _lollipopCount;
     int _lollipopCount = 0;
 
     public void Update()
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (1 << other.gameObject.layer == _lollipopLayer.value)
         {
             Destroy(other.gameObject);
-            _lollipopCount++;
+            ChangeLolipopCount(true);
         }
     }
 
@@ -62,4 +63,23 @@ public class PlayerController : MonoBehaviour
         mainGame.HideButton.interactable = false;
     }
     */
+
+
+    public void ChangeLolipopCount(bool increase)
+    {
+        _lollipopCount += increase? 1 : -1;
+        MainGame.Instance.UIManager.UpdateLolipopText(_lollipopCount);
+    }
+
+    public void ChangeLolipopCount(int newValue)
+    {
+        _lollipopCount = newValue;
+        MainGame.Instance.UIManager.UpdateLolipopText(_lollipopCount);
+    }
+
+
+    public void Die()
+    {
+        MainGame.Instance.LevelManager.OnPlayerDie();
+    }
 }

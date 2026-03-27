@@ -14,6 +14,8 @@ public class MainGame : MonoBehaviour
     public LevelManager LevelManager => _levelManager;
     public AnimatorManager AnimatorManager => _animatorManager;
     public New_CameraFollow CameraFollow => _cameraFollow;
+    public UIManager UIManager => _uiManager;
+
     public LayerMask BoxLayer => _boxLayer; 
     public Button HideButton => _hideButton.GetComponent<Button>();
 
@@ -22,6 +24,7 @@ public class MainGame : MonoBehaviour
     [SerializeField] PlayerController _playerController;
     [SerializeField] LevelManager _levelManager;
     [SerializeField] AnimatorManager _animatorManager;
+    [SerializeField] UIManager _uiManager;
     [Header("Variables")]
     [SerializeField] LayerMask _boxLayer;
     [SerializeField] GameObject _hideButton;
@@ -108,5 +111,11 @@ public class MainGame : MonoBehaviour
         {
             Debug.LogWarning("This level not exist !");
         }
+    }
+
+
+    public void OnPlayerDie()
+    {
+        SetLevel(_currentLevelIndex);
     }
 }
