@@ -29,7 +29,7 @@ public class Level_State_AITurn : Level_State_Base
     public override void EnterState()
     {
         main = MainGame.Instance;
-        foreach (ChildNPC child in main.LevelManager.Children)
+        foreach (ChildNPC child in main.LevelManager.Ennemies)
         {
             //child.CurrentPosition = child.FindBestCase();
             //child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
@@ -125,9 +125,10 @@ public class Level_State_AITurn : Level_State_Base
 
         //if (HasAllChildrenMoved())
 
-        if (_levelManager.Count_AIFinishToMove < _levelManager.Children.Count)
+        if (_levelManager.Count_AIFinishToMove < _levelManager.Ennemies.Count)
             return;
 
+        main.LevelManager.Count_AIFinishToMove = 0;
         main.HidePlayer(false);
         main.LevelManager.NextTurn();
 
@@ -172,7 +173,7 @@ public class Level_State_AITurn : Level_State_Base
     bool HasAllChildrenMoved()
     {
         bool hasChildrenMoved = true;
-        foreach (ChildNPC npc in main.LevelManager.Children)
+        foreach (ChildNPC npc in main.LevelManager.Ennemies)
         {
             if (npc.IsAIMoving)
                 return false;

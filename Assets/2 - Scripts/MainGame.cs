@@ -1,7 +1,9 @@
 using System;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.AdaptivePerformance.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -29,6 +31,10 @@ public class MainGame : MonoBehaviour
     //Vector3 _targetPosition;
 
 
+    [SerializeField] private TextAsset[] Levels;
+    private int _currentLevelIndex = 0;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -38,7 +44,7 @@ public class MainGame : MonoBehaviour
     private void Start()
     {
         //_cameraFollow.gameObject.transform.position = _playerController.transform.position + (_cameraFollow.LevelCenter.position - _playerController.transform.position) / 2 + _cameraFollow.Offset;
-        _levelManager.CanPlayerMoveTo();
+        //_levelManager.CanPlayerMoveTo();
     }
     // Update is called once per frame
     void Update()
@@ -70,5 +76,36 @@ public class MainGame : MonoBehaviour
         _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hideTrigger;
         HideButton.interactable = false;
     }
-    
+
+
+    /// <summary>
+    /// Load next level
+    /// </summary>
+    public void SetLevel()
+    {
+        _currentLevelIndex++; 
+        if (_currentLevelIndex >= Levels.Length)
+        {
+            return;
+        }
+        TextAsset nextMap = Levels[_currentLevelIndex];
+
+        LevelManager.LoadNewLevel(nextMap);
+    }
+
+    /// <summary>
+    /// Load level by is index
+    /// </summary>
+    public void SetLevel(int levelIndex)
+    {
+        if (levelIndex >= 0 && levelIndex < Levels.Length)
+        {
+            _currentLevelIndex = levelIndex;
+            LevelManager.LoadNewLevel(Levels[_currentLevelIndex]);
+        }
+        else
+        {
+            Debug.LogWarning("Index de niveau invalide !");
+        }
+    }
 }

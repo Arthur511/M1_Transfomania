@@ -624,10 +624,10 @@ GameObject:
   - component: {fileID: 785705245}
   - component: {fileID: 785705244}
   - component: {fileID: 785705243}
-  - component: {fileID: 785705246}
   - component: {fileID: 785705247}
+  - component: {fileID: 785705248}
   m_Layer: 0
-  m_Name: Scripts
+  m_Name: _Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,12 +721,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraFollow: {fileID: 1771824906}
   _playerController: {fileID: 400554688}
-  _levelManager: {fileID: 785705246}
+  _levelManager: {fileID: 785705248}
   _animatorManager: {fileID: 785705247}
   _boxLayer:
     serializedVersion: 2
     m_Bits: 64
   _hideButton: {fileID: 1529131401}
+  Levels: []
 --- !u!4 &785705245
 Transform:
   m_ObjectHideFlags: 0
@@ -742,7 +743,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &785705246
+--- !u!114 &785705247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785705242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f2694231b5e7c4c8e4f464c3d35f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &785705248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -762,7 +775,7 @@ MonoBehaviour:
     Prefab: {fileID: 2020277331}
     CaseType: 0
   - Char: 83
-    Prefab: {fileID: 2020277331}
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
     CaseType: 1
   - Char: 69
     Prefab: {fileID: 2020277331}
@@ -776,23 +789,9 @@ MonoBehaviour:
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
   _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
-  _children: []
   _lolypopPrefab: {fileID: 4846675529896236931, guid: 299a828fd91af6a45b75aa3dde51e3d5, type: 3}
-  _lolypops: []
   _levelCasesPocket: {fileID: 1925359097}
   Count_AIFinishToMove: 0
---- !u!114 &785705247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785705242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f2694231b5e7c4c8e4f464c3d35f35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1061270823
 GameObject:
   m_ObjectHideFlags: 0

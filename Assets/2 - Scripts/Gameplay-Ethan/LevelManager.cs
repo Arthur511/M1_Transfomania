@@ -13,32 +13,48 @@ public class LevelManager : MonoBehaviour
         _maping = maping;
     }*/
 
+    public int[,] DistanceFromPlayer { get; set; }
+    public Vector2Int[] NeighborDirection => _neighborDirection;
+
+    #region Level State
+    [Header("Level State")]
     public Level_StateManager StateMachine { get; private set; }
     public enum BaseStateChoices { Pause, PlayerTurn, AITurn };
     public BaseStateChoices NPC_BaseState;
-    public int[,] DistanceFromPlayer { get; set; }
-    public Case[,] Map => _map;
-    public Vector2Int[] NeighborDirection => _neighborDirection;
-    public List<BaseNPC> Children => _children;
 
+    #endregion
+
+
+    #region Map Generation
+    [Header("Map Generation")]
+    public Case[,] Map => _map;
+    private Case[,] _map;
 
     [SerializeField] private TextAsset _maping;
     [SerializeField] private Vector3 _caseSize = new Vector3(1, 0.5f, 1);
     [SerializeField] private CaseTypeData[] _casesTypeDatas;
+
+    public Vector3 GridCenter { get; private set; }
+    #endregion
+
+    #region Case's Materials
     [Header("Case's Materials")]
     [SerializeField] private Material _caseMat;
     [SerializeField] private Material _accessCaseMat;
+    #endregion
 
+    #region Prefabs
+    [Header("Prefabs")]
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private List<BaseNPC> _children;
-
     [SerializeField] private GameObject _lolypopPrefab;
+    #endregion
+
+    public List<BaseNPC> Ennemies => _ennemies;
+    private List<BaseNPC> _ennemies = new List<BaseNPC>();
     public List<GameObject> Lolypops => _lolypops;
-    [SerializeField] private List<GameObject> _lolypops;
+    private List<GameObject> _lolypops = new List<GameObject>();
 
-    public Vector3 GridCenter { get; private set; }
 
-    private Case[,] _map;
     Vector2Int[] _neighborDirection = new Vector2Int[]
     {
         new Vector2Int(1, 0),
@@ -60,7 +76,9 @@ public class LevelManager : MonoBehaviour
 
     public int Count_AIFinishToMove = 0;
 
-    private void Awake()
+
+
+    private void Start()
     {
         StateMachine = new Level_StateManager();
         InitCaseInstAction();
@@ -68,6 +86,8 @@ public class LevelManager : MonoBehaviour
         InitStateAction();
         SetBaseState();
         StateMachine.SwitchState(new Level_State_PlayerTurn(this));
+
+        CanPlayerMoveTo();
     }
 
 
@@ -169,7 +189,7 @@ public class LevelManager : MonoBehaviour
         GameObject enemy = Instantiate(_enemyPrefab);
         BaseNPC npcController = enemy.GetComponent<BaseNPC>();
         npcController.Initialize(new Vector2Int(x, y), pos + new Vector3(0, 1, 0));
-        _children.Add(npcController);
+        _ennemies.Add(npcController);
     }
 
     private void InitLolypop(int x, int y, Vector3 pos, CaseTypeData caseDatas)
@@ -306,4 +326,52 @@ public class LevelManager : MonoBehaviour
         _currentTurn++;
     }
 
+
+    public void ClearLevel()
+    {
+        if (_levelCasesPocket != null)
+        {
+            for (int i = _levelCasesPocket.transform.childCount - 1; i >= 0; i--)
+            {
+                Destroy(_levelCasesPocket.transform.GetChild(i).gameObject);
+            }
+        }
+        _map = null;
+
+        foreach (var enemy in _ennemies)
+        {
+            if (enemy != null)
+                Destroy(enemy.gameObject);
+        }
+        _ennemies.Clear();
+
+        foreach (var lolypop in _lolypops)
+        {
+            if (lolypop != null)
+                Destroy(lolypop.gameObject);
+        }
+        _lolypops.Clear();
+
+        foreach (var txt in _debugTexts)
+        {
+            if (txt != null)
+                Destroy(txt);
+        }
+        _debugTexts.Clear();
+
+        _currentAccessibleCases.Clear();
+
+        _currentTurn = 0;
+        Count_AIFinishToMove = 0;
+    }
+
+
+    public void LoadNewLevel(TextAsset newMapData)
+    {
+        ClearLevel();
+        _maping = newMapData;
+        GenerateLevel();
+        CanPlayerMoveTo();
+        StateMachine.SwitchState(new Level_State_PlayerTurn(this));
+    }
 }

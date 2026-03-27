@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static CaseTypeData;
+using UnityEngine.SceneManagement;
 
 public class Level_State_PlayerTurn : Level_State_Base
 {
@@ -121,9 +123,18 @@ public class Level_State_PlayerTurn : Level_State_Base
                     if (((1 << hit.collider.gameObject.layer) & main.BoxLayer.value) != 0)
                     {
                         Debug.Log("Touch cell !!!");
+
                         Vector2Int clickPos;
+                        Case touchCase = hit.transform.GetComponent<Case>();
                         if (hit.transform.GetComponent<Case>() == null)
                             return;
+
+
+                        if (touchCase.CaseTypeData.CaseType == TypeOfCases.Door)
+                        {
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                        }
+
                         clickPos = hit.transform.GetComponent<Case>().CasePosition;
                         if (main.PlayerController.CanMoveAtPosition(clickPos))
                         {
