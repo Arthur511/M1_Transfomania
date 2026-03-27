@@ -39,10 +39,32 @@ public class Level_State_PlayerTurn : Level_State_Base
             main.PlayerController.MoveCharacter(_targetPosition);
             if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
             {
-                //Debug.Log("OK ARRIVED");
-                main.LevelManager.NextTurn();
-                _isPlayerMoving = false;
-                _levelManager.CanPlayerMoveTo();
+                if (_isPlayerMoving)
+                {
+                    main.PlayerController.MoveCharacter(_targetPosition);
+                    if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
+                    {
+                        _isPlayerMoving = false;
+
+                        Case currentCase = main.LevelManager.Map[main.PlayerController.PlayerPosition.x, main.PlayerController.PlayerPosition.y];
+
+                        if (currentCase != null && currentCase.CaseTypeData.CaseType == TypeOfCases.Door)
+                        {
+                            main.SetLevel();
+                        }
+                        else
+                        {
+                            main.LevelManager.NextTurn();
+                            _levelManager.CanPlayerMoveTo();
+                        }
+                    }
+                }
+
+
+                //main.LevelManager.NextTurn();
+                //_isPlayerMoving = false;
+                //_levelManager.CanPlayerMoveTo();
+
             }
         }
 
@@ -129,11 +151,6 @@ public class Level_State_PlayerTurn : Level_State_Base
                         if (hit.transform.GetComponent<Case>() == null)
                             return;
 
-
-                        if (touchCase.CaseTypeData.CaseType == TypeOfCases.Door)
-                        {
-                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                        }
 
                         clickPos = hit.transform.GetComponent<Case>().CasePosition;
                         if (main.PlayerController.CanMoveAtPosition(clickPos))

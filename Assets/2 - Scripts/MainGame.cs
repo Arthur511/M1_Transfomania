@@ -39,6 +39,7 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        SetLevel(0);
 
     }
     private void Start()
@@ -105,7 +106,7 @@ public class MainGame : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Index de niveau invalide !");
+            Debug.LogWarning("This level not exist !");
         }
     }
 }
