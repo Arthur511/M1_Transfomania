@@ -914,18 +914,27 @@ MonoBehaviour:
   - Char: 42
     Prefab: {fileID: 2020277331}
     CaseType: 0
+    CaseContent: 0
   - Char: 83
     Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
     CaseType: 1
+    CaseContent: 0
   - Char: 69
     Prefab: {fileID: 2020277331}
     CaseType: 2
+    CaseContent: 0
   - Char: 76
     Prefab: {fileID: 2020277331}
     CaseType: 3
+    CaseContent: 0
   - Char: 68
     Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
     CaseType: 4
+    CaseContent: 0
+  - Char: 36
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
+    CaseType: 4
+    CaseContent: 1
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
   _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
@@ -2492,8 +2501,8 @@ SceneRoots:
   - {fileID: 12514273}
   - {fileID: 1639959660}
   - {fileID: 1939893874}
-  - {fileID: 785705245}
   - {fileID: 4750556788736132583}
   - {fileID: 1061270827}
   - {fileID: 1707383419}
   - {fileID: 1925359098}
+  - {fileID: 785705245}

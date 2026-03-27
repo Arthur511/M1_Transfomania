@@ -7,6 +7,7 @@ public class CaseTypeData
     public char Char;
     public GameObject Prefab;
     public TypeOfCases CaseType;
+    public Content CaseContent;
 
     public enum TypeOfCases
     {
@@ -15,5 +16,12 @@ public class CaseTypeData
         SpawnEnemies,
         Lolipop,
         Door
+    }
+
+    public enum Content
+    {
+        None,
+        Enemy,
+        Lolipop,
     }
 }
