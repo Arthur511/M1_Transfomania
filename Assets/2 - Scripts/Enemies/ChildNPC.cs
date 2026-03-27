@@ -14,6 +14,7 @@ public class ChildNPC : BaseNPC
         /*if (other.gameObject. != null)
         {
         }*/
+
     }
 
 

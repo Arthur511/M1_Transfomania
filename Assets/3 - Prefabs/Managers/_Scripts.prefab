@@ -1,0 +1,248 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1381957887320641436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300237736796927548}
+  - component: {fileID: 6313684686482678917}
+  - component: {fileID: 2965248808635406938}
+  - component: {fileID: 1718047024520138585}
+  - component: {fileID: 1709896977231679834}
+  - component: {fileID: 6971678151814783313}
+  - component: {fileID: 4214383613587479905}
+  - component: {fileID: 2601146772197886163}
+  m_Layer: 0
+  m_Name: _Scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1300237736796927548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.90934, y: 0.5, z: 0.93459}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6313684686482678917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9434ad9edee8ed04dbf56d45b45d7b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraFollow: {fileID: 0}
+  _playerController: {fileID: 0}
+  _levelManager: {fileID: 1709896977231679834}
+  _animatorManager: {fileID: 1718047024520138585}
+  _uiManager: {fileID: 6971678151814783313}
+  _boxLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _hideButton: {fileID: 0}
+  Levels:
+  - {fileID: 4900000, guid: 5ef5a820eda40c64bb648d3712668de4, type: 3}
+  - {fileID: 4900000, guid: ffa714af45aac7d4cb8642d1fdab25ef, type: 3}
+  - {fileID: 4900000, guid: 1ff633a07d8f0834f9219f43c4e5f1b4, type: 3}
+  - {fileID: 4900000, guid: 5ef5a820eda40c64bb648d3712668de4, type: 3}
+  - {fileID: 4900000, guid: d67e08bc6f89e6b458b93ef7f1271ce3, type: 3}
+--- !u!114 &2965248808635406938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4add4482-e650-4878-b7e9-68fa01936cf1
+    m_ActionName: 'Player/Hide[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 32b35790-4ed0-4e9a-aa41-69ac6d629449
+    m_ActionName: 'UI/Point[/Mouse/position,/Pen/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c7022bf-7922-4f7c-a998-c437916075ad
+    m_ActionName: 'UI/Click[/Mouse/leftButton,/Pen/tip]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 44b200b1-1557-4083-816c-b22cbdf77ddf
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dad70c86-b58c-4b17-88ad-f5e53adf419e
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0489e84a-4833-4c40-bfae-cea84b696689
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24908448-c609-4bc3-a128-ea258674378a
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1718047024520138585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f2694231b5e7c4c8e4f464c3d35f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1709896977231679834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7cef35481582f49843a5862ccb966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPC_BaseState: 1
+  _maping: {fileID: 4900000, guid: baf6c41b66c931046b721dd1b0242874, type: 3}
+  _caseSize: {x: 2, y: 0.5, z: 2}
+  _casesTypeDatas:
+  - Char: 42
+    Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+    CaseType: 0
+    CaseContent: 0
+  - Char: 83
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
+    CaseType: 1
+    CaseContent: 0
+  - Char: 69
+    Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+    CaseType: 0
+    CaseContent: 1
+  - Char: 76
+    Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
+    CaseType: 0
+    CaseContent: 2
+  - Char: 68
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
+    CaseType: 2
+    CaseContent: 0
+  - Char: 37
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
+    CaseType: 2
+    CaseContent: 1
+  _caseMat: {fileID: 2100000, guid: ee842b58d9cda1e4682152f77e3dd166, type: 2}
+  _accessCaseMat: {fileID: 2100000, guid: fe8c2efdcdc03da42be9962d51aa8a7d, type: 2}
+  _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
+  _lolypopPrefab: {fileID: 4846675529896236931, guid: 299a828fd91af6a45b75aa3dde51e3d5, type: 3}
+  _levelCasesPocket: {fileID: 0}
+  Count_AIFinishToMove: 0
+--- !u!114 &6971678151814783313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b540a5cc177091f43a92f33fdd1167d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_LolipopCount: {fileID: 0}
+--- !u!114 &4214383613587479905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad45357ea4206d3449b5b08a5fb8aa4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 0}
+  Cinematicbrain: {fileID: 0}
+  time_before_swap_again: 9.67
+  time_before_swap_material: 4
+  thumbnail: {fileID: 0}
+  thumbnailswapped: {fileID: 2100000, guid: 7f37a460ba329e247b2e01754081a2c7, type: 2}
+  introtxt:
+  - "O\xF9 es-tu ?"
+  - "Dans une autre pi\xE8ce ?"
+  - Attention aux autres enfants !
+  asset: {fileID: 0}
+  time_before_next_txt: 2
+--- !u!114 &2601146772197886163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381957887320641436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f2694231b5e7c4c8e4f464c3d35f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
