@@ -1028,6 +1028,110 @@ PrefabInstance:
       propertyPath: 'Levels.Array.data[0]'
       value: 
       objectReference: {fileID: 4900000, guid: 12256bd1623f0f147b21fca62aabe036, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[0].LevelArt
+      value: 
+      objectReference: {fileID: 6730631641410638243, guid: a68ee482d3e5c274daafbb9a6380350f, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[0].levelArt
+      value: 
+      objectReference: {fileID: 6730631641410638243, guid: a68ee482d3e5c274daafbb9a6380350f, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].LevelArt
+      value: 
+      objectReference: {fileID: 6954140520610734284, guid: 54b0e9fddcb43a94d9bf0bbd7b631513, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].levelArt
+      value: 
+      objectReference: {fileID: 6954140520610734284, guid: 54b0e9fddcb43a94d9bf0bbd7b631513, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].LevelArt
+      value: 
+      objectReference: {fileID: 9213981267287148094, guid: c3f62a1f5b4fb0749bf9192029cb5c0a, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].levelArt
+      value: 
+      objectReference: {fileID: 9213981267287148094, guid: c3f62a1f5b4fb0749bf9192029cb5c0a, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].LevelArt
+      value: 
+      objectReference: {fileID: 2602553744647913721, guid: d9dc25cded910384b8edf5621a75823b, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].levelArt
+      value: 
+      objectReference: {fileID: 2602553744647913721, guid: d9dc25cded910384b8edf5621a75823b, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].LevelArt
+      value: 
+      objectReference: {fileID: 7677150156696739033, guid: 7067d3caf156a664abe68165e75b86b8, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].levelArt
+      value: 
+      objectReference: {fileID: 7677150156696739033, guid: 7067d3caf156a664abe68165e75b86b8, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[0].Textfile_LvL
+      value: 
+      objectReference: {fileID: 4900000, guid: 12256bd1623f0f147b21fca62aabe036, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[0].textfile_lvl
+      value: 
+      objectReference: {fileID: 4900000, guid: 12256bd1623f0f147b21fca62aabe036, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].Textfile_LvL
+      value: 
+      objectReference: {fileID: 4900000, guid: ffa714af45aac7d4cb8642d1fdab25ef, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].textfile_lvl
+      value: 
+      objectReference: {fileID: 4900000, guid: ffa714af45aac7d4cb8642d1fdab25ef, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].Textfile_LvL
+      value: 
+      objectReference: {fileID: 4900000, guid: 1ff633a07d8f0834f9219f43c4e5f1b4, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].textfile_lvl
+      value: 
+      objectReference: {fileID: 4900000, guid: 1ff633a07d8f0834f9219f43c4e5f1b4, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].Textfile_LvL
+      value: 
+      objectReference: {fileID: 4900000, guid: 5ef5a820eda40c64bb648d3712668de4, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].textfile_lvl
+      value: 
+      objectReference: {fileID: 4900000, guid: 5ef5a820eda40c64bb648d3712668de4, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].Textfile_LvL
+      value: 
+      objectReference: {fileID: 4900000, guid: d67e08bc6f89e6b458b93ef7f1271ce3, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].textfile_lvl
+      value: 
+      objectReference: {fileID: 4900000, guid: d67e08bc6f89e6b458b93ef7f1271ce3, type: 3}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].Offset_LevelArt.x
+      value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[1].Offset_LevelArt.z
+      value: -4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].Offset_LevelArt.x
+      value: 6.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[2].Offset_LevelArt.z
+      value: -6.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].Offset_LevelArt.x
+      value: 7.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[3].Offset_LevelArt.z
+      value: -2.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: text_LolipopCount
       value: 
@@ -2050,7 +2154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1209111940
 Transform:
   m_ObjectHideFlags: 0
@@ -2991,6 +3095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1049442742263408736, guid: 09979ab4658f3834db7162421fe63e2e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2835521450210599260, guid: 09979ab4658f3834db7162421fe63e2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -3508,6 +3616,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  Offset: {x: 0, y: 10, z: -10}
+  MinZoom: 10
+  MaxZoom: 25
+  ZoomLimiter: 50
+  Smoothness: 0.125
 --- !u!114 &1690098475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4121,15 +4235,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771824900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
+  m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   Offset: {x: -3, y: 10, z: -3}
-  MinZoom: 3
-  MaxZoom: 10
+  MinZoom: 4
+  MaxZoom: 25
   ZoomLimiter: 50
-  Smoothness: 0.125
+  Smoothness: 0
 --- !u!1 &1806814323
 GameObject:
   m_ObjectHideFlags: 0

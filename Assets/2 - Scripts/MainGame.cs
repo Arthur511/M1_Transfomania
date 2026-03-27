@@ -34,7 +34,7 @@ public class MainGame : MonoBehaviour
     //Vector3 _targetPosition;
 
 
-    [SerializeField] private TextAsset[] Levels;
+    [SerializeField] private Level[] Levels;
     private int _currentLevelIndex = 0;
 
 
@@ -93,9 +93,9 @@ public class MainGame : MonoBehaviour
         {
             return;
         }
-        TextAsset nextMap = Levels[_currentLevelIndex];
+        Level nextLevel = Levels[_currentLevelIndex];
 
-        LevelManager.LoadNewLevel(nextMap);
+        LevelManager.LoadNewLevel(nextLevel);
     }
 
     /// <summary>

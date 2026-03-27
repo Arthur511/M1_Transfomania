@@ -47,6 +47,11 @@ public class New_CameraFollow : MonoBehaviour
         }
     }
 
+    public void ResetTarget()
+    {
+        _isGridCenterSet = false;
+    }
+
 
     private void ProcessMovement()
     {

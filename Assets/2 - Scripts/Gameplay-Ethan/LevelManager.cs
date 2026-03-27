@@ -30,8 +30,11 @@ public class LevelManager : MonoBehaviour
     public Case[,] Map => _map;
     private Case[,] _map;
 
-    [SerializeField] private TextAsset _maping;
+    private Level _level;
+    private TextAsset _maping;
+    private GameObject _levelArt;
     [SerializeField] private Vector3 _caseSize = new Vector3(1, 0.5f, 1);
+    [SerializeField] private Vector3 _levelArtScale = new Vector3(2.875355f, 2.875355f, 2.875355f);
     [SerializeField] private CaseTypeData[] _casesTypeDatas;
 
     public Vector3 GridCenter { get; private set; }
@@ -109,6 +112,8 @@ public class LevelManager : MonoBehaviour
 
     private void GenerateLevel()
     {
+        _maping = _level.Textfile_LvL;
+
         Dictionary<char, CaseTypeData> casesEntitesDict = new Dictionary<char, CaseTypeData>();
 
         foreach (var caseData in _casesTypeDatas)
@@ -116,7 +121,7 @@ public class LevelManager : MonoBehaviour
             casesEntitesDict.Add(caseData.Char, caseData);
         }
 
-        string[] lines = _maping.text.Split("\r\n");
+        string[] lines = _maping.text.Trim().Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
         _map = new Case[lines[0].Length, lines.Length];
 
 
@@ -143,12 +148,16 @@ public class LevelManager : MonoBehaviour
                     }
                 }
             }
-
-            float centerX = (_map.GetLength(0) - 1) * _caseSize.x / 2f;
-            float centerZ = (_map.GetLength(1) - 1) * -_caseSize.z / 2f;
-
-            GridCenter = new Vector3(centerX, 0, centerZ);
         }
+
+
+        float centerX = (_map.GetLength(0) - 1) * _caseSize.x / 2f;
+        float centerZ = (_map.GetLength(1) - 1) * -_caseSize.z / 2f;
+        GridCenter = new Vector3(centerX, 0, centerZ);
+
+
+        _levelArt = Instantiate(_level.LevelArt, GridCenter - _level.Offset_LevelArt, Quaternion.Euler(0,180,0));
+        _levelArt.transform.localScale = _levelArtScale;
     }
 
 
@@ -240,6 +249,7 @@ public class LevelManager : MonoBehaviour
         if (_stateAction.TryGetValue(NPC_BaseState, out Action action))
             action();
     }
+
 
     public void CanPlayerMoveTo()
     {
@@ -383,17 +393,21 @@ public class LevelManager : MonoBehaviour
 
         _currentTurn = 0;
         Count_AIFinishToMove = 0;
+
+        Destroy(_levelArt);
     }
 
 
-    public void LoadNewLevel(TextAsset newMapData)
+    public void LoadNewLevel(Level newLevel)
     {
         ClearLevel();
-        _maping = newMapData;
+        _level = newLevel;
         GenerateLevel();
         CanPlayerMoveTo();
         MainGame.Instance.PlayerController.ChangeLolipopCount(0);
         SetBaseState();
+
+        MainGame.Instance.CameraFollow.ResetTarget();
     }
 
 
