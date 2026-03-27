@@ -1596,6 +1596,7 @@ GameObject:
   - component: {fileID: 785705246}
   - component: {fileID: 785705247}
   - component: {fileID: 785705248}
+  - component: {fileID: 785705249}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1645,14 +1646,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9434ad9edee8ed04dbf56d45b45d7b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraFollow: {fileID: 1771824905}
+  _cameraFollow: {fileID: 1771824911}
   _playerController: {fileID: 2089252220}
   _levelManager: {fileID: 785705246}
   _animatorManager: {fileID: 785705248}
+  _uiManager: {fileID: 785705249}
   _boxLayer:
     serializedVersion: 2
     m_Bits: 64
   _hideButton: {fileID: 348297041}
+  Levels: []
 --- !u!4 &785705245
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,10 +1705,9 @@ MonoBehaviour:
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
   _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
-  _children: []
   _lolypopPrefab: {fileID: 4846675529896236931, guid: 299a828fd91af6a45b75aa3dde51e3d5, type: 3}
-  _lolypops: []
   _levelCasesPocket: {fileID: 398317584}
+  Count_AIFinishToMove: 0
 --- !u!114 &785705247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,6 +1744,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f2694231b5e7c4c8e4f464c3d35f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &785705249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785705242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b540a5cc177091f43a92f33fdd1167d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_LolipopCount: {fileID: 0}
 --- !u!1001 &798232473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3981,12 +3996,12 @@ GameObject:
   - component: {fileID: 1771824903}
   - component: {fileID: 1771824902}
   - component: {fileID: 1771824904}
-  - component: {fileID: 1771824905}
   - component: {fileID: 1771824906}
   - component: {fileID: 1771824907}
   - component: {fileID: 1771824908}
   - component: {fileID: 1771824909}
   - component: {fileID: 1771824910}
+  - component: {fileID: 1771824911}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4104,18 +4119,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &1771824905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1771824900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1771824906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4282,9 +4285,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a9332576e7a75499b28340357d7e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 2089252226}
-  Offset: {x: 0, y: 10, z: -10}
-  MinZoom: 10
+--- !u!114 &1771824911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771824900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  Offset: {x: -4, y: 3, z: -4}
+  MinZoom: 2
   MaxZoom: 25
   ZoomLimiter: 50
   Smoothness: 0.125
@@ -5109,11 +5124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8eddcd9d7e99d4bbd22023e77c5499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2089252226 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 538357208299225906, guid: 78b3d013526554d4ba93d7c240c976c2, type: 3}
-  m_PrefabInstance: {fileID: 2089252219}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2115827019
 PrefabInstance:
   m_ObjectHideFlags: 0
