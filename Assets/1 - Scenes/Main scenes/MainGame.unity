@@ -1807,18 +1807,27 @@ MonoBehaviour:
   - Char: 42
     Prefab: {fileID: 566532896}
     CaseType: 0
+    CaseContent: 0
   - Char: 83
     Prefab: {fileID: 566532896}
     CaseType: 1
+    CaseContent: 0
   - Char: 69
     Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
     CaseType: 2
+    CaseContent: 0
   - Char: 76
     Prefab: {fileID: 558761989313330320, guid: d0978ed2965a72449b4630e3f75353d5, type: 3}
     CaseType: 3
+    CaseContent: 0
   - Char: 68
     Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
     CaseType: 4
+    CaseContent: 0
+  - Char: 37
+    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
+    CaseType: 4
+    CaseContent: 1
   _caseMat: {fileID: 2100000, guid: ee842b58d9cda1e4682152f77e3dd166, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: fe8c2efdcdc03da42be9962d51aa8a7d, type: 2}
   _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
