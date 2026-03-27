@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
     private int _currentTurn = 0;
 
     private Dictionary<TypeOfCases, Action<int, int, Vector3, CaseTypeData>> _caseInstAction;
+    private Dictionary<ContentOfCases, Action<int, int, Vector3, CaseTypeData>> _caseContentAction;
 
 
     [SerializeField] private GameObject _levelCasesPocket;
@@ -80,15 +81,20 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        //StateMachine = new Level_StateManager();
+        //InitCaseInstAction();
+        //InitCaseContentAction();
+        //InitStateAction();
+    }
+
+    public void Initialize()
+    {
         StateMachine = new Level_StateManager();
         InitCaseInstAction();
-        GenerateLevel();
+        InitCaseContentAction();
         InitStateAction();
-        SetBaseState();
-        StateMachine.SwitchState(new Level_State_PlayerTurn(this));
-
-        CanPlayerMoveTo();
     }
+
 
 
     void Update()
@@ -130,6 +136,11 @@ public class LevelManager : MonoBehaviour
                         Vector3 pos = new Vector3(x * _caseSize.x, 0, y * -_caseSize.z);
                         action(x, y, pos, data);
                     }
+                    if (_caseContentAction.TryGetValue(data.CaseContent, out Action<int, int, Vector3, CaseTypeData> content))
+                    {
+                        Vector3 pos = new Vector3(x * _caseSize.x, 0, y * -_caseSize.z);
+                        content(x, y, pos, data);
+                    }
                 }
             }
 
@@ -160,9 +171,18 @@ public class LevelManager : MonoBehaviour
         {
             {TypeOfCases.Walkable, (x, y , pos, data) => InitWalkableCase(x, y, pos, data)},
             {TypeOfCases.Spawn,(x, y , pos, data) => InitSpawnCase(x, y, pos, data)},
-            {TypeOfCases.SpawnEnemies,(x, y , pos, data) => InitSpawnEnemies(x, y, pos, data)},
-            {TypeOfCases.Lolipop,(x, y , pos, data) => InitLolypop(x, y, pos, data)},
+            //{TypeOfCases.SpawnEnemies,(x, y , pos, data) => InitSpawnEnemies(x, y, pos, data)},
+            //{TypeOfCases.Lolipop,(x, y , pos, data) => InitLolypop(x, y, pos, data)},
             {TypeOfCases.Door,(x, y , pos, data) => InitDoor(x, y, pos, data)},
+        };
+    }
+
+    private void InitCaseContentAction()
+    {
+        _caseContentAction = new Dictionary<ContentOfCases, Action<int, int, Vector3, CaseTypeData>>
+        {
+            {ContentOfCases.Enemy, (x, y , pos, data) => InitSpawnEnemies(x, y, pos, data)},
+            {ContentOfCases.Lolipop,(x, y , pos, data) => InitLolypop(x, y, pos, data)},
         };
     }
 
@@ -373,7 +393,7 @@ public class LevelManager : MonoBehaviour
         GenerateLevel();
         CanPlayerMoveTo();
         MainGame.Instance.PlayerController.ChangeLolipopCount(0);
-        StateMachine.SwitchState(new Level_State_PlayerTurn(this));
+        SetBaseState();
     }
 
 

@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7cef35481582f49843a5862ccb966a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC_BaseState: 0
+  NPC_BaseState: 1
   _maping: {fileID: 4900000, guid: baf6c41b66c931046b721dd1b0242874, type: 3}
   _caseSize: {x: 5, y: 0.5, z: 5}
   _casesTypeDatas:
@@ -921,20 +921,16 @@ MonoBehaviour:
     CaseContent: 0
   - Char: 69
     Prefab: {fileID: 2020277331}
-    CaseType: 2
-    CaseContent: 0
+    CaseType: 0
+    CaseContent: 1
   - Char: 76
     Prefab: {fileID: 2020277331}
-    CaseType: 3
-    CaseContent: 0
+    CaseType: 0
+    CaseContent: 2
   - Char: 68
     Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
-    CaseType: 4
+    CaseType: 2
     CaseContent: 0
-  - Char: 36
-    Prefab: {fileID: 558761989313330320, guid: 9bc09d69ac653fd42a97718baa8b0bb1, type: 3}
-    CaseType: 4
-    CaseContent: 1
   _caseMat: {fileID: 2100000, guid: ddd9b7b457382c24fb2594feae40ff66, type: 2}
   _accessCaseMat: {fileID: 2100000, guid: bf522522ddb886a44b73bd1ed44514a7, type: 2}
   _enemyPrefab: {fileID: 6235805520565778528, guid: 69a672cc0a68dad4688dade72161ec82, type: 3}
@@ -1823,7 +1819,6 @@ GameObject:
   - component: {fileID: 1771824901}
   - component: {fileID: 1771824904}
   - component: {fileID: 1771824905}
-  - component: {fileID: 1771824906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1967,18 +1962,6 @@ MonoBehaviour:
   MaxZoom: 25
   ZoomLimiter: 50
   Smoothness: 0.125
---- !u!114 &1771824906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1771824900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a9332576e7a75499b28340357d7e13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1806814323
 GameObject:
   m_ObjectHideFlags: 0

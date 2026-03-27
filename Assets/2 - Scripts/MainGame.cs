@@ -42,6 +42,7 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        _levelManager.Initialize();
         SetLevel(0);
 
     }

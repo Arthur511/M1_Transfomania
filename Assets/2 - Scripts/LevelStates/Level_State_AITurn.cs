@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,31 +30,48 @@ public class Level_State_AITurn : Level_State_Base
     public override void EnterState()
     {
         main = MainGame.Instance;
-        foreach (ChildNPC child in main.LevelManager.Ennemies)
-        {
-            //child.CurrentPosition = child.FindBestCase();
-            //child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
 
-            //Debug.Log($"npc : {child.CurrentPosition}, player : {MainGame.Instance.PlayerController.PlayerPosition}");
-            //if (child.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
-            //{
-            //    SceneManager.LoadScene("Scene_Arthur2");
-            //}
+        // On parcourt la liste à l'envers
+        for (int i = main.LevelManager.Ennemies.Count - 1; i >= 0; i--)
+        {
+            BaseNPC ennemies = main.LevelManager.Ennemies[i];
+
+            if (ennemies == null) continue;
 
             if (MainGame.Instance.PlayerController.IsHiding)
-            {
-                //child.PathToFollow = BuildPathToStart(child);
-                //child.PathIndex = 0;
-                child.StateMachine.SwitchState(new NPC_State_GoBack(child));
-            }
+                ennemies.StateMachine.SwitchState(new NPC_State_GoBack(ennemies));
             else
-            {
-                child.StateMachine.SwitchState(new NPC_State_Chase(child));
+                ennemies.StateMachine.SwitchState(new NPC_State_Chase(ennemies));
 
-            }
-
-            child.IsAIMoving = true;
+            ennemies.IsAIMoving = true;
         }
+
+        //main = MainGame.Instance;
+        //foreach (ChildNPC child in main.LevelManager.Ennemies)
+        //{
+        //    //child.CurrentPosition = child.FindBestCase();
+        //    //child.TargetPosition = main.LevelManager.Map[child.CurrentPosition.x, child.CurrentPosition.y].transform.position;
+
+        //    //Debug.Log($"npc : {child.CurrentPosition}, player : {MainGame.Instance.PlayerController.PlayerPosition}");
+        //    //if (child.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
+        //    //{
+        //    //    SceneManager.LoadScene("Scene_Arthur2");
+        //    //}
+
+        //    if (MainGame.Instance.PlayerController.IsHiding)
+        //    {
+        //        //child.PathToFollow = BuildPathToStart(child);
+        //        //child.PathIndex = 0;
+        //        child.StateMachine.SwitchState(new NPC_State_GoBack(child));
+        //    }
+        //    else
+        //    {
+        //        child.StateMachine.SwitchState(new NPC_State_Chase(child));
+
+        //    }
+
+        //    child.IsAIMoving = true;
+        //}
 #if UNITY_EDITOR
         Debug.Log($"[Level - StateMachine] Level enter in AI Turn State");
 #endif
