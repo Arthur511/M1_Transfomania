@@ -44,7 +44,7 @@ public class PlayerAnimator : AnimatorHandler
 
     public void PlayIdle() => SetBool("isrunning", false);
     public void PlayWalk() => SetBool("isrunning", true);
-    public void SetIsHiding(bool hiding) => SetBool("ishiding", hiding);
+    public void SetIsHiding(bool hiding) => SetBool("ishidding", hiding);
 
     /*
     /// <summary>
