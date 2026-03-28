@@ -6,7 +6,7 @@ public class NPC_State_Wait : NPC_State_Base
 
     public override void EnterState()
     {
-
+        _npc.Anim.PlayIdle();
     }
 
     public override void UpdateState()

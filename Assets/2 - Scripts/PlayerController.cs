@@ -23,6 +23,20 @@ public class PlayerController : MonoBehaviour
     public int LollipopCount => _lollipopCount;
     int _lollipopCount = 0;
 
+
+    #region Animation
+    [Header("Animation")]
+    public PlayerAnimator Anim => _anim;
+    private PlayerAnimator _anim;
+    #endregion
+
+    private void Awake()
+    {
+        _anim = GetComponent<PlayerAnimator>();
+
+    }
+
+
     public void Update()
     {
 

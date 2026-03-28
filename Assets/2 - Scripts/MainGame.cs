@@ -12,7 +12,6 @@ public class MainGame : MonoBehaviour
     public static MainGame Instance;
     public PlayerController PlayerController => _playerController;
     public LevelManager LevelManager => _levelManager;
-    public AnimatorManager AnimatorManager => _animatorManager;
     public New_CameraFollow CameraFollow => _cameraFollow;
     public UIManager UIManager => _uiManager;
 
@@ -23,7 +22,6 @@ public class MainGame : MonoBehaviour
     [SerializeField] New_CameraFollow _cameraFollow;
     [SerializeField] PlayerController _playerController;
     [SerializeField] LevelManager _levelManager;
-    [SerializeField] AnimatorManager _animatorManager;
     [SerializeField] UIManager _uiManager;
     [Header("Variables")]
     [SerializeField] LayerMask _boxLayer;
@@ -77,7 +75,9 @@ public class MainGame : MonoBehaviour
     {
         _playerController.IsHiding = hide;
         string hideTrigger = _playerController.IsHiding ? "Unhiding" : "Hiding";
-        _animatorManager.PlayAnimation(_playerController.PlayerAnimator, hideTrigger);
+
+        _playerController.Anim?.SetIsHiding(hide);
+
         _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hideTrigger;
         HideButton.interactable = false;
     }

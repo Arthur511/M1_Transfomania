@@ -8,6 +8,7 @@ public class NPC_State_GoBack : NPC_State_Base
 
     public override void EnterState()
     {
+        _npc.Anim.PlayWalk();
         _npc.PathToFollow = BuildPathToStart(_npc);
         _npc.PathIndex = 0;
     }

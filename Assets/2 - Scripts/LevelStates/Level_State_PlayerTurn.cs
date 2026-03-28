@@ -45,6 +45,7 @@ public class Level_State_PlayerTurn : Level_State_Base
                     if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
                     {
                         _isPlayerMoving = false;
+                        main.PlayerController.Anim?.PlayIdle();
 
                         Case currentCase = main.LevelManager.Map[main.PlayerController.PlayerPosition.x, main.PlayerController.PlayerPosition.y];
 
@@ -159,7 +160,9 @@ public class Level_State_PlayerTurn : Level_State_Base
                             _isPlayerMoving = true;
                             _isCameraMoving = true;
                             _targetPosition = hit.transform.position;
+
                             main.PlayerController.PlayerPosition = clickPos;
+                            main.PlayerController.Anim?.PlayWalk();
 
                             _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromPlayer(main.PlayerController);
                             _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromPlayer(main.PlayerController));

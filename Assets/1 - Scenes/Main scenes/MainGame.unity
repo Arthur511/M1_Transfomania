@@ -3616,12 +3616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  Offset: {x: 0, y: 10, z: -10}
-  MinZoom: 10
-  MaxZoom: 25
-  ZoomLimiter: 50
-  Smoothness: 0.125
 --- !u!114 &1690098475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4235,11 +4229,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771824900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c596834b5d5d9004192ecdb90251b8b8, type: 3}
+  m_Script: {fileID: 11500000, guid: c6a9332576e7a75499b28340357d7e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  Offset: {x: -3, y: 10, z: -3}
+  Offset: {x: -3, y: 4, z: -3}
   MinZoom: 4
   MaxZoom: 25
   ZoomLimiter: 50
@@ -4937,6 +4931,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2965037583161808531, guid: 78b3d013526554d4ba93d7c240c976c2, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: e305110e28f37d240b3dc232cacf61b3, type: 3}
+    - target: {fileID: 2965037583161808531, guid: 78b3d013526554d4ba93d7c240c976c2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ef468c03fe306bc4a85a408d4b49e09a, type: 2}
     - target: {fileID: 6603061762173384250, guid: 78b3d013526554d4ba93d7c240c976c2, type: 3}
       propertyPath: m_Name
       value: Player

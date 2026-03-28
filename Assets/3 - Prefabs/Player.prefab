@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2256566837799810211}
   - component: {fileID: 597030837957049738}
   - component: {fileID: 5824947983591798529}
-  - component: {fileID: 375788631125713541}
   - component: {fileID: 4516594420637853593}
+  - component: {fileID: 375788631125713541}
   - component: {fileID: 2965037583161808531}
+  - component: {fileID: -1704216942752792361}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -114,23 +115,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &375788631125713541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6603061762173384250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8eddcd9d7e99d4bbd22023e77c5499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerAnimator: {fileID: 2965037583161808531}
-  _speedPlayerMove: 5
-  _lollipopLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!54 &4516594420637853593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,6 +142,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &375788631125713541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603061762173384250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8eddcd9d7e99d4bbd22023e77c5499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerAnimator: {fileID: 2965037583161808531}
+  _speedPlayerMove: 5
+  _lollipopLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &2965037583161808531
 Animator:
   serializedVersion: 7
@@ -167,8 +168,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6603061762173384250}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 81771e241ab9bea4da64a699a42a3959, type: 3}
-  m_Controller: {fileID: 9100000, guid: fef4a6b5d2404e841a49fc3e32301eac, type: 2}
+  m_Avatar: {fileID: 9000000, guid: e305110e28f37d240b3dc232cacf61b3, type: 3}
+  m_Controller: {fileID: 9100000, guid: ef468c03fe306bc4a85a408d4b49e09a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -180,6 +181,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1704216942752792361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603061762173384250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c111bca442fc1544e82b092e948d3b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 2965037583161808531}
+  data: {fileID: 11400000, guid: 0e212a96d20859443a5e3cf7cd2a9af1, type: 2}
 --- !u!1001 &8935568595320158872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,7 +259,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ANIM8ROBOTTRON
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 81771e241ab9bea4da64a699a42a3959, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -7,7 +7,7 @@ public class BaseNPC : MonoBehaviour
     public Vector2Int StartPosition { get; set; }
     public bool IsAIMoving { get; set; }
     public Vector3 TargetPosition { get; set; }
-    [SerializeField] float _speedChild;
+    [SerializeField] float _speed;
 
     [SerializeField] Vector2Int _startPosition;
     protected Vector2Int[] _neighborDirection = new Vector2Int[]
@@ -20,10 +20,18 @@ public class BaseNPC : MonoBehaviour
     public Vector2Int[] GetNeighborDirection() {  return _neighborDirection; }
 
 
+    #region Animation
+    [Header("Animation")]
+    public AIAnimator Anim => _anim;
+    private AIAnimator _anim;
+    #endregion
+
     protected void Awake()
     {
+        _anim = GetComponent<AIAnimator>();
         StateMachine = new NPC_StateManager(new NPC_State_Wait(this));
     }
+
 
     protected void Update()
     {
@@ -58,7 +66,7 @@ public class BaseNPC : MonoBehaviour
 
     public void MoveCharacter(Vector3 targetPos)
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), _speedChild * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), _speed * Time.deltaTime);
     }
 
 

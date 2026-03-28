@@ -14,6 +14,8 @@ public class NPC_State_Chase : NPC_State_Base
         
         if (_npc.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
         {
+            _npc.Anim.PlayPickingUp();
+
             if (MainGame.Instance.PlayerController.LollipopCount > 0)
             {
                 MainGame.Instance.PlayerController.ChangeLolipopCount(false);
@@ -25,6 +27,8 @@ public class NPC_State_Chase : NPC_State_Base
             return;
         }
 
+
+        _npc.Anim.PlayWalk();
         _npc.IsAIMoving = true;
     }
 
