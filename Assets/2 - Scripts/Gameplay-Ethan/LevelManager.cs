@@ -80,15 +80,8 @@ public class LevelManager : MonoBehaviour
 
     public int Count_AIFinishToMove = 0;
 
+    private static readonly int _idlePlayerHash = Animator.StringToHash("Idle_Robotron");
 
-
-    private void Start()
-    {
-        //StateMachine = new Level_StateManager();
-        //InitCaseInstAction();
-        //InitCaseContentAction();
-        //InitStateAction();
-    }
 
     public void Initialize()
     {
@@ -97,7 +90,6 @@ public class LevelManager : MonoBehaviour
         InitCaseContentAction();
         InitStateAction();
     }
-
 
 
     void Update()
@@ -109,6 +101,22 @@ public class LevelManager : MonoBehaviour
     {
         StateMachine.CurrentState.FixedUpdateState();
     }
+
+
+    public void OnPlayerHideToggled()
+    {
+        if (!(StateMachine.CurrentState is Level_State_PlayerTurn)) return;
+
+        StateMachine.SwitchState(new Level_State_WaitAnim(this,
+            () =>
+            {
+                var anim = MainGame.Instance.PlayerController.Anim;
+                return anim == null || anim.IsAnimationComplete();
+            },
+            new Level_State_AITurn(this) // Faire en sorte de mettre NextTurn à la place
+        ));
+    }
+
 
     private void GenerateLevel()
     {
@@ -237,15 +245,6 @@ public class LevelManager : MonoBehaviour
 
     private void SetBaseState()
     {
-        /*
-        if (NPC_BaseState == BaseStateChoices.Pause)
-            StateMachine.Initialize(new Level_StatePause(this));
-        else if (NPC_BaseState == BaseStateChoices.PlayerTurn)
-            StateMachine.Initialize(new Level_State_PlayerTurn(this));
-        else if (NPC_BaseState == BaseStateChoices.AITurn)
-            StateMachine.Initialize(new Level_State_AITurn (this));
-        */
-
         if (_stateAction.TryGetValue(NPC_BaseState, out Action action))
             action();
     }
@@ -316,7 +315,6 @@ public class LevelManager : MonoBehaviour
     #region DEBUG
     public void DebugDistanceMap(int[,] values)
     {
-        // Nettoyer les anciens textes
         foreach (var txt in _debugTexts)
             Destroy(txt);
         _debugTexts.Clear();
@@ -327,7 +325,6 @@ public class LevelManager : MonoBehaviour
             {
                 if (_map[x, y] == null) continue;
 
-                // Créer un GameObject avec TextMeshPro
                 var go = new GameObject($"Debug_{x}_{y}");
                 var tmp = go.AddComponent<TextMeshPro>();
 
@@ -336,9 +333,8 @@ public class LevelManager : MonoBehaviour
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.color = Color.white;
 
-                // Positionner au-dessus de la case
                 go.transform.position = _map[x, y].transform.position + Vector3.up * 0.5f;
-                go.transform.rotation = Quaternion.Euler(90, 0, 0); // À plat sur le plateau
+                go.transform.rotation = Quaternion.Euler(90, 0, 0);
 
                 _debugTexts.Add(go);
             }

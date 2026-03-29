@@ -14,6 +14,7 @@ public class NPC_State_Chase : NPC_State_Base
         
         if (_npc.CurrentPosition == MainGame.Instance.PlayerController.PlayerPosition)
         {
+            _npc.FacePos(_npc.TargetPosition);
             _npc.Anim.PlayPickingUp();
 
             if (MainGame.Instance.PlayerController.LollipopCount > 0)
@@ -27,7 +28,7 @@ public class NPC_State_Chase : NPC_State_Base
             return;
         }
 
-
+        _npc.FacePos(_npc.TargetPosition);
         _npc.Anim.PlayWalk();
         _npc.IsAIMoving = true;
     }
@@ -39,15 +40,17 @@ public class NPC_State_Chase : NPC_State_Base
 
     public override void FixedUpdateState()
     {
-        if (_npc.IsAIMoving)
+        if (!_npc.IsAIMoving)
+            return;
+
+        _npc.FacePos(_npc.TargetPosition);
+        _npc.MoveCharacter(_npc.TargetPosition);
+
+        if ((_npc.gameObject.transform.position - _npc.TargetPosition).sqrMagnitude < 0.1f * 0.1f)
         {
-            _npc.MoveCharacter(_npc.TargetPosition);
-            if ((_npc.gameObject.transform.position - _npc.TargetPosition).sqrMagnitude < 0.1f * 0.1f)
-            {
-                _npc.IsAIMoving = false;
-                MainGame.Instance.LevelManager.Count_AIFinishToMove += 1;
-                _npc.StateMachine.SwitchState(new NPC_State_Wait(_npc));
-            }
+            _npc.IsAIMoving = false;
+            MainGame.Instance.LevelManager.Count_AIFinishToMove += 1;
+            _npc.StateMachine.SwitchState(new NPC_State_Wait(_npc));
         }
     }
 
@@ -55,4 +58,5 @@ public class NPC_State_Chase : NPC_State_Base
     {
         
     }
+
 }

@@ -20,9 +20,9 @@ public class Level_State_PlayerTurn : Level_State_Base
     {
         main = MainGame.Instance;
         main.HideButton.interactable = true;
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         Debug.Log($"[Level - StateMachine] Level enter in Player Turn State");
-#endif
+        #endif
     }
 
     public override void UpdateState()
@@ -35,44 +35,30 @@ public class Level_State_PlayerTurn : Level_State_Base
     {
         if (_isPlayerMoving)
         {
-
             main.PlayerController.MoveCharacter(_targetPosition);
+
             if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
             {
-                if (_isPlayerMoving)
+                _isPlayerMoving = false;
+                main.PlayerController.Anim?.PlayIdle();
+
+                Case currentCase = main.LevelManager.Map[main.PlayerController.PlayerPosition.x, main.PlayerController.PlayerPosition.y];
+
+                if (currentCase != null && currentCase.CaseTypeData.CaseType == TypeOfCases.Door)
                 {
-                    main.PlayerController.MoveCharacter(_targetPosition);
-                    if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
-                    {
-                        _isPlayerMoving = false;
-                        main.PlayerController.Anim?.PlayIdle();
-
-                        Case currentCase = main.LevelManager.Map[main.PlayerController.PlayerPosition.x, main.PlayerController.PlayerPosition.y];
-
-                        if (currentCase != null && currentCase.CaseTypeData.CaseType == TypeOfCases.Door)
-                        {
-                            main.SetLevel();
-                        }
-                        else
-                        {
-                            main.LevelManager.NextTurn();
-                            _levelManager.CanPlayerMoveTo();
-                        }
-                    }
+                    main.SetLevel();
                 }
-
-
-                //main.LevelManager.NextTurn();
-                //_isPlayerMoving = false;
-                //_levelManager.CanPlayerMoveTo();
-
+                else
+                {
+                    main.LevelManager.NextTurn();
+                    _levelManager.CanPlayerMoveTo();
+                }
             }
         }
 
         if (_isCameraMoving)
         {
-            //main.CameraFollow.SetCurrentOffset(main.PlayerController);
-            //main.CameraFollow.CameraMovement(_targetPosition);
+
             if ((main.CameraFollow.transform.position - _targetPosition + main.CameraFollow.Offset).sqrMagnitude < 0.01f)
                 _isCameraMoving = false;
         }
@@ -80,112 +66,53 @@ public class Level_State_PlayerTurn : Level_State_Base
 
     public override void ExitState()
     {
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         Debug.Log($"[Level - StateMachine] Level exit Player Turn State");
-#endif
+        #endif
     }
 
-    #region methods
+
     private void OnClick()
     {
-        MainGame main = MainGame.Instance;
-        /* #region PC_INTERACTION
-         if (Mouse.current.leftButton.wasPressedThisFrame)
-         {
-             RaycastHit hit;
-             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-             if (Physics.Raycast(ray, out hit))
-             {
-                 if (1 << hit.collider.gameObject.layer == main.BoxLayer.value)
-                 {
-                     Vector2Int clickPos;
-                     if (hit.transform.GetComponent<Case>() == null)
-                         return;
-                     clickPos = hit.transform.GetComponent<Case>().CasePosition;
-                     if (main.PlayerController.CanMoveAtPosition(clickPos))
-                     {
-                         main.HideButton.interactable = false;
-                         _isPlayerMoving = true;
-                         _isCameraMoving = true;
-                         _targetPosition = hit.transform.position;
-                         main.PlayerController.PlayerPosition = clickPos;
+        if (Touchscreen.current == null) 
+            return;
+        if (Touchscreen.current.primaryTouch.phase.ReadValue() != UnityEngine.InputSystem.TouchPhase.Began)
+            return;
 
-                         _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromCase(main.PlayerController);
-                         _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromCase(main.PlayerController));
+        RaycastHit hit;
+        Ray ray = main.CameraFollow.gameObject.GetComponent<Camera>().ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+        if (!Physics.Raycast(ray, out hit))
+            return;
+        if (((1 << hit.collider.gameObject.layer) & main.BoxLayer.value) == 0)
+            return;
 
-                         _levelManager.ClearMatOnCases();
-                     }
-                     if (hit.transform.GetComponent<Case>().CaseTypeData.CaseType == TypeOfCases.Door)
-                    {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    }
-                     
-                 }
-             }
-         }
-         #endregion*/
+        Case touchCase = hit.transform.GetComponent<Case>();
+        if (hit.transform.GetComponent<Case>() == null)
+            return;
 
-        #region MOBILE_INTERACTION
+        Vector2Int clickPos = touchCase.CasePosition;
+        if (!main.PlayerController.CanMoveAtPosition(clickPos))
+            return;
 
-        //Debug.Log("CLLLLIIIIICCCCCCKKKKKK !!!");
-        if (Touchscreen.current != null)
-        {
-            //Debug.Log("Touch !!!");
-            //Touch touch = Input.GetTouch(0);
-            if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
-            {
-                Debug.Log("Touch start !!!");
+        main.HideButton.interactable = false;
+        _isPlayerMoving = true;
+        _isCameraMoving = true;
+        _targetPosition = hit.transform.position;
 
-                /*if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                    return;*/
-                RaycastHit hit;
-                Ray ray = main.CameraFollow.gameObject.GetComponent<Camera>().ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
-                if (Physics.Raycast(ray, out hit))
-                {
-                    Debug.Log("Touch something !!!");
-                    if (((1 << hit.collider.gameObject.layer) & main.BoxLayer.value) != 0)
-                    {
-                        Debug.Log("Touch cell !!!");
+        main.PlayerController.PlayerPosition = clickPos;
+        main.PlayerController.Anim?.PlayWalk();
 
-                        Vector2Int clickPos;
-                        Case touchCase = hit.transform.GetComponent<Case>();
-                        if (hit.transform.GetComponent<Case>() == null)
-                            return;
+        FacePos(main.PlayerController.transform, _targetPosition);
 
-
-                        clickPos = hit.transform.GetComponent<Case>().CasePosition;
-                        if (main.PlayerController.CanMoveAtPosition(clickPos))
-                        {
-                            main.HideButton.interactable = false;
-                            _isPlayerMoving = true;
-                            _isCameraMoving = true;
-                            _targetPosition = hit.transform.position;
-
-                            main.PlayerController.PlayerPosition = clickPos;
-                            main.PlayerController.Anim?.PlayWalk();
-
-                            _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromPlayer(main.PlayerController);
-                            _levelManager.DebugDistanceMap(_levelManager.CalculateDistanceFromPlayer(main.PlayerController));
-
-                            _levelManager.ClearMatOnCases();
-                        }
-
-                    }
-                }
-            }
-        }
-        #endregion
+        _levelManager.DistanceFromPlayer = _levelManager.CalculateDistanceFromPlayer(main.PlayerController);
+        _levelManager.ClearMatOnCases();
     }
 
-    /*public void HidePlayer()
+
+    private static void FacePos(Transform thingToLook, Vector3 target)
     {
-        MainGame main = MainGame.Instance;
-        main.PlayerController.IsHiding = !main.PlayerController.IsHiding;
-        main.PlayerController.HideButton.GetComponentInChildren<TextMeshProUGUI>().text = main.PlayerController.IsHiding ? "Unhide" : "Hide";
-        main.LevelManager.NextTurn();
-    }*/
-
-    #endregion
-
-
+        Vector3 dir = new Vector3(target.x - thingToLook.position.x, 0f, target.z - thingToLook.position.z);
+        if (dir.sqrMagnitude > 0.001f)
+            thingToLook.rotation = Quaternion.LookRotation(dir);
+    }
 }
