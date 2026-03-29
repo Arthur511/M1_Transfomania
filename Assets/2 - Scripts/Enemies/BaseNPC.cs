@@ -104,6 +104,13 @@ public class BaseNPC : MonoBehaviour
         return bestPosition;
     }
 
+    public void FacePos(Vector3 target)
+    {
+        Vector3 dir = new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z);
+        if (dir.sqrMagnitude > 0.001f * 0.001f)
+            transform.rotation = Quaternion.LookRotation(dir);
+    }
+
 
     public void Die()
     {

@@ -27,16 +27,11 @@ public class MainGame : MonoBehaviour
     [SerializeField] LayerMask _boxLayer;
     [SerializeField] GameObject _hideButton;
 
-    //bool _isPlayerMoving = false;
-    //bool _isCameraMoving = false;
-    //Vector3 _targetPosition;
-
 
     [SerializeField] private Level[] Levels;
     private int _currentLevelIndex = 0;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         Instance = this;
@@ -44,16 +39,11 @@ public class MainGame : MonoBehaviour
         SetLevel(0);
 
     }
-    private void Start()
-    {
-        //_cameraFollow.gameObject.transform.position = _playerController.transform.position + (_cameraFollow.LevelCenter.position - _playerController.transform.position) / 2 + _cameraFollow.Offset;
-        //_levelManager.CanPlayerMoveTo();
-    }
-    // Update is called once per frame
+
+
     void Update()
     {
-        //if (Level_State.PlayerTurn)
-        //OnClick();
+
 
     }
 
@@ -67,18 +57,17 @@ public class MainGame : MonoBehaviour
     public void ToggleHidePlayer()
     {
         HidePlayer(!_playerController.IsHiding);
-        LevelManager.NextTurn();
+        _levelManager.OnPlayerHideToggled();
+        //LevelManager.NextTurn();
     }
 
 
     public void HidePlayer(bool hide)
     {
         _playerController.IsHiding = hide;
-        string hideTrigger = _playerController.IsHiding ? "Unhiding" : "Hiding";
-
         _playerController.Anim?.SetIsHiding(hide);
 
-        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hideTrigger;
+        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hide ? "Unhide" : "Hide";
         HideButton.interactable = false;
     }
 
