@@ -1148,6 +1148,14 @@ PrefabInstance:
       propertyPath: Levels.Array.data[3].Offset_LevelArt.z
       value: -2.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].Offset_LevelArt.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: Levels.Array.data[4].Offset_LevelArt.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _hideIcon
       value: 
@@ -1170,6 +1178,7 @@ PrefabInstance:
       objectReference: {fileID: 6410737867805830741}
     m_RemovedComponents:
     - {fileID: 1718047024520138585, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+    - {fileID: 2601146772197886163, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -4359,9 +4368,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771824900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922ac698b359e7746ad6515f51be519f, type: 3}
+  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  Offset: {x: -3, y: 4, z: -3}
+  MinZoom: 4
+  MaxZoom: 25
+  ZoomLimiter: 50
+  Smoothness: 0
 --- !u!1 &1806814323
 GameObject:
   m_ObjectHideFlags: 0
