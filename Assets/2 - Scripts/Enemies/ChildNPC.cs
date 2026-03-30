@@ -17,7 +17,7 @@ public class ChildNPC : BaseNPC
 
     }
 
-
+    /*
     public override Vector2Int FindBestCase()
     {
         if (MainGame.Instance.LevelManager.DistanceFromPlayer[CurrentPosition.x, CurrentPosition.y] == 0)
@@ -50,4 +50,5 @@ public class ChildNPC : BaseNPC
         }
         return bestPosition;
     }
+    */
 }

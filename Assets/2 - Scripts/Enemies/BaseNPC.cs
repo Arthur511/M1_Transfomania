@@ -20,6 +20,7 @@ public class BaseNPC : MonoBehaviour
     };
     public Vector2Int[] GetNeighborDirection() {  return _neighborDirection; }
 
+    int _turnCount = 0;
 
     #region Animation
     [Header("Animation")]
@@ -83,36 +84,51 @@ public class BaseNPC : MonoBehaviour
 
 
     // We use children
-    public virtual Vector2Int FindBestCase()
+    public /*virtual*/ Vector2Int FindBestCase()
     {
-        if (MainGame.Instance.LevelManager.DistanceFromPlayer[CurrentPosition.x, CurrentPosition.y] == 0)
-            return CurrentPosition;
+        LevelManager levelManager = MainGame.Instance.LevelManager;
 
-        Case[,] map = MainGame.Instance.LevelManager.Map;
+        if (levelManager.DistanceFromPlayer[CurrentPosition.x, CurrentPosition.y] == 0)
+        {
+            levelManager.ClaimedPositions.Add(CurrentPosition);
+            return CurrentPosition;
+        }
+
+        Case[,] map = levelManager.Map;
         int lessDistance = int.MaxValue;
-        Vector2Int bestPosition = new Vector2Int();
+        Vector2Int bestPosition = CurrentPosition;
+        bool bestIsVertical = _turnCount % 2 == 0 ? false : true;
         foreach (var dir in _neighborDirection)
         {
             var neighbor = CurrentPosition + dir;
 
             if (neighbor.x < 0 || neighbor.y < 0 || neighbor.x >= map.GetLength(0) || neighbor.y >= map.GetLength(1))
-            { continue; }
+                continue;
 
-            if (map[neighbor.x, neighbor.y] != null)
+            if (map[neighbor.x, neighbor.y] == null)
+                continue;
+
+
+            int dist = levelManager.DistanceFromPlayer[neighbor.x, neighbor.y];
+            if (dist == 0)
             {
+                bestPosition = neighbor;
+                break;
+            }
 
-                if (MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y] == 0)
-                {
-                    bestPosition = neighbor;
-                    return bestPosition;
-                }
-                if (lessDistance > MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y])
-                {
-                    lessDistance = MainGame.Instance.LevelManager.DistanceFromPlayer[neighbor.x, neighbor.y];
-                    bestPosition = neighbor;
-                }
+            bool isVertical = dir.x == 0;
+            if (dist < lessDistance || (dist == lessDistance && isVertical && !bestIsVertical))
+            {
+                lessDistance = dist;
+                bestPosition = neighbor;
             }
         }
+
+        if (levelManager.ClaimedPositions.Contains(bestPosition))
+            bestPosition = CurrentPosition;
+
+        levelManager.ClaimedPositions.Add(bestPosition);
+        _turnCount++;
         return bestPosition;
     }
 

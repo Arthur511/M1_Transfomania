@@ -24,11 +24,12 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
-
-    #region Map Generation
-    [Header("Map Generation")]
+    #region Map Gestion
+    [Header("Map Gestion")]
     public Case[,] Map => _map;
     private Case[,] _map;
+
+    public HashSet<Vector2Int> ClaimedPositions { get; private set; } = new HashSet<Vector2Int>();
 
     private Level _level;
     private TextAsset _maping;

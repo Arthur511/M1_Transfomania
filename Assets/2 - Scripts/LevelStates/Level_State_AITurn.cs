@@ -26,6 +26,7 @@ public class Level_State_AITurn : Level_State_Base
     public override void EnterState()
     {
         main = MainGame.Instance;
+        main.LevelManager.ClaimedPositions.Clear();
 
         var enemies = new List<BaseNPC>(main.LevelManager.Ennemies);
 
