@@ -22,5 +22,6 @@ public class Level_StateManager
         CurrentState.ExitState();
         CurrentState = newState;
         CurrentState.EnterState();
+        SoundManager.PlaySound(SoundType.SUCESS, 5f);
     }
 }

@@ -65,6 +65,8 @@ public class Level_State_AITurn : Level_State_Base
         main.LevelManager.Count_AIFinishToMove = 0;
 
         bool wasHiding = main.PlayerController.IsHiding;
+
+
         main.HidePlayer(false);
 
 

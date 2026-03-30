@@ -61,6 +61,8 @@ public class MainGame : MonoBehaviour
 
         HidePlayer(!_playerController.IsHiding);
         //LevelManager.NextTurn();
+        
+        
     }
 
 
@@ -72,6 +74,7 @@ public class MainGame : MonoBehaviour
 
         _uiManager.UpdateHideButton(hide);
         HideButton.interactable = false;
+        SoundManager.PlaySound(SoundType.HIDE, 5f);
     }
 
 

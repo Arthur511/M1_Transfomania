@@ -2,20 +2,12 @@
 using UnityEngine;
 public enum SoundType
 {
-    COLLECTINGSOUND1,
-    COLLECTINGSOUND2,
-    COLLECTINGSOUND3,
-    CREAMONGROUND,
-    THROWCREAM,
-    ENEMYDYING,
-    CLICK,
-    NEWLEVEL,
-    PLAYERTAKEDAMAGE1,
-    PLAYERTAKEDAMAGE2,
-    PLAYERTAKEDAMAGE3,
-    PLAYERTAKEDAMAGE4,
-    RIBBON,
-    SAVEFAIRY,
+    LOLIPOP,
+    CHILDGRAB,
+    CHILDJOY,
+    HIDE,
+    SUCESS,
+    CLIC,
 }
 
 [RequireComponent(typeof(AudioSource))]
