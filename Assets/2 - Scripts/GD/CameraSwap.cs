@@ -2,6 +2,9 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class CameraSwap : MonoBehaviour
 {
@@ -12,7 +15,8 @@ public class CameraSwap : MonoBehaviour
 
     public float time_before_swap_material;
     public GameObject thumbnail;
-    public Material thumbnailswapped;
+    public GameObject Image;
+    public Sprite nouveauSprite;
 
     public string[] introtxt;
     public TMP_Text asset;
@@ -48,7 +52,7 @@ public class CameraSwap : MonoBehaviour
     IEnumerator WaitAndSwapMaterial()
     {
         yield return new WaitForSeconds(time_before_swap_material);
-        thumbnail.GetComponent<MeshRenderer>().material = thumbnailswapped;
+        Image.GetComponent<Image>().sprite = nouveauSprite;
     }
 
     IEnumerator WaitAndSwapAgain()
