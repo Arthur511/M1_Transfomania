@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public Fade Fade;
+
     [SerializeField] private TextMeshProUGUI _text_LolipopCount;
     [SerializeField] private Button _hideButton;
     [SerializeField] private Sprite _hideIcon;
