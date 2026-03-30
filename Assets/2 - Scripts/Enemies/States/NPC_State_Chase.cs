@@ -46,7 +46,10 @@ public class NPC_State_Chase : NPC_State_Base
         _npc.FacePos(_npc.TargetPosition);
         _npc.MoveCharacter(_npc.TargetPosition);
 
-        if ((_npc.gameObject.transform.position - _npc.TargetPosition).sqrMagnitude < 0.1f * 0.1f)
+        Vector3 npcPos = _npc.transform.position;
+        float dist = (new Vector3(npcPos.x - _npc.TargetPosition.x, 0f, npcPos.z - _npc.TargetPosition.z)).sqrMagnitude;
+
+        if (dist < 0.1f * 0.1f)
         {
             _npc.IsAIMoving = false;
             MainGame.Instance.LevelManager.Count_AIFinishToMove += 1;

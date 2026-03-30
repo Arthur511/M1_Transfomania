@@ -37,7 +37,7 @@ public class MainGame : MonoBehaviour
     {
         Instance = this;
         _levelManager.Initialize();
-        SetLevel(0);
+        SetLevel(0, true);
         _uiManager.UpdateHideButton(false);
     }
 
@@ -57,8 +57,9 @@ public class MainGame : MonoBehaviour
 
     public void ToggleHidePlayer()
     {
+        if (!(_levelManager.StateMachine.CurrentState is Level_State_PlayerTurn)) return;
+
         HidePlayer(!_playerController.IsHiding);
-        _levelManager.OnPlayerHideToggled();
         //LevelManager.NextTurn();
     }
 
@@ -67,6 +68,7 @@ public class MainGame : MonoBehaviour
     {
         _playerController.IsHiding = hide;
         _playerController.Anim?.SetIsHiding(hide);
+        _levelManager.OnPlayerHideToggled();
 
         _uiManager.UpdateHideButton(hide);
         HideButton.interactable = false;
@@ -91,12 +93,12 @@ public class MainGame : MonoBehaviour
     /// <summary>
     /// Load level by is index
     /// </summary>
-    public void SetLevel(int levelIndex)
+    public void SetLevel(int levelIndex, bool isFirstLoad = false)
     {
         if (levelIndex >= 0 && levelIndex < Levels.Length)
         {
             _currentLevelIndex = levelIndex;
-            LevelManager.LoadNewLevel(Levels[_currentLevelIndex]);
+            LevelManager.LoadNewLevel(Levels[_currentLevelIndex], isFirstLoad);
         }
         else
         {

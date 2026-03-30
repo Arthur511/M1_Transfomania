@@ -34,7 +34,10 @@ public class NPC_State_GoBack : NPC_State_Base
         _npc.FacePos(targetPos);
         _npc.MoveCharacter(targetPos);
 
-        if ((_npc.gameObject.transform.position - targetPos).sqrMagnitude < 0.1f * 0.1f)
+        Vector3 npcPos = _npc.transform.position;
+        float dist = (new Vector3(npcPos.x - targetPos.x, 0f, npcPos.z - targetPos.z)).sqrMagnitude;
+
+        if (dist < 0.1f * 0.1f)
         {
             _npc.transform.position = targetPos;
             _npc.CurrentPosition = targetCell;

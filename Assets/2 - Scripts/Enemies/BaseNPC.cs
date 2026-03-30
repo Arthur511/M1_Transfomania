@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class BaseNPC : MonoBehaviour
@@ -62,11 +63,16 @@ public class BaseNPC : MonoBehaviour
 
 
 
-    public void Initialize(Vector2Int instPositionMap, Vector3 instPositionWorld)
+    public void Initialize(Vector2Int instPositionMap, float yPos)
     {
-        transform.position = MainGame.Instance.LevelManager.Map[instPositionMap.x, instPositionMap.y].transform.position;
-        CurrentPosition = instPositionMap;
+        Case[,] map = MainGame.Instance.LevelManager.Map;
+        Case newCase = map[instPositionMap.x, instPositionMap.y];
+        Vector3 pos = new Vector3(newCase.transform.position.x, yPos, newCase.transform.position.z);
 
+        transform.position = pos;
+
+
+        CurrentPosition = instPositionMap;
         StartPosition = instPositionMap;
     }
 

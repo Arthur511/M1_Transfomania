@@ -216,7 +216,7 @@ public class LevelManager : MonoBehaviour
     private void InitSpawnCase(int x, int y, Vector3 pos, CaseTypeData caseDatas)
     {
         InitWalkableCase(x, y, pos, caseDatas);
-        MainGame.Instance.PlayerController.transform.position = pos + new Vector3(0, 1, 0);
+        MainGame.Instance.PlayerController.transform.position = pos + new Vector3(0, pos.y + 1 + _caseSize.y / 2, 0);
         MainGame.Instance.PlayerController.PlayerPosition = new Vector2Int(x, y);
     }
 
@@ -225,7 +225,7 @@ public class LevelManager : MonoBehaviour
         InitWalkableCase(x, y, pos, caseDatas);
         GameObject enemy = Instantiate(_enemyPrefab);
         BaseNPC npcController = enemy.GetComponent<BaseNPC>();
-        npcController.Initialize(new Vector2Int(x, y), pos + new Vector3(0, 1, 0));
+        npcController.Initialize(new Vector2Int(x, y), 0);
         _ennemies.Add(npcController);
     }
 
@@ -394,14 +394,18 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void LoadNewLevel(Level newLevel)
+    public void LoadNewLevel(Level newLevel, bool isFirstLoad = false)
     {
         ClearLevel();
         _level = newLevel;
         GenerateLevel();
         CanPlayerMoveTo();
         MainGame.Instance.PlayerController.ChangeLolipopCount(0);
-        SetBaseState();
+        if (isFirstLoad)
+            SetBaseState();
+        else
+            StateMachine.Initialize(new Level_State_PlayerTurn(this));
+
 
         MainGame.Instance.CameraFollow.ResetTarget();
     }

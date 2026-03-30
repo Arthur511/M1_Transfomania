@@ -27,10 +27,10 @@ public class Level_State_AITurn : Level_State_Base
     {
         main = MainGame.Instance;
 
-        for (int i = main.LevelManager.Ennemies.Count - 1; i >= 0; i--)
-        {
-            BaseNPC enemy = main.LevelManager.Ennemies[i];
+        var enemies = new List<BaseNPC>(main.LevelManager.Ennemies);
 
+        foreach (BaseNPC enemy in enemies)
+        {
             if (enemy == null) continue;
 
             /*

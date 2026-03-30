@@ -37,7 +37,10 @@ public class Level_State_PlayerTurn : Level_State_Base
         {
             main.PlayerController.MoveCharacter(_targetPosition);
 
-            if ((main.PlayerController.transform.position - new Vector3(0, 1, 0) - _targetPosition).sqrMagnitude < 0.01f)
+            Vector3 playerPos = main.PlayerController.transform.position;
+            float dist = (new Vector3(playerPos.x - _targetPosition.x, 0f, playerPos.z - _targetPosition.z)).sqrMagnitude;
+
+            if (dist < 0.1f * 0.1f)
             {
                 _isPlayerMoving = false;
                 main.PlayerController.Anim?.PlayIdle();
