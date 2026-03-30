@@ -30,6 +30,8 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundType sound, float volume = 1)
     {
         if (Instance == null) return;
+
+        Debug.Log($"[PlatSoud] {sound}");
         Instance.AudioSource.PlayOneShot(Instance.soundlist[(int)sound], volume);
     }
 

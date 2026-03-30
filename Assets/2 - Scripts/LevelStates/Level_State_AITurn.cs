@@ -66,8 +66,8 @@ public class Level_State_AITurn : Level_State_Base
 
         bool wasHiding = main.PlayerController.IsHiding;
 
-
-        main.HidePlayer(false);
+        if (main.PlayerController.IsHiding)
+            main.HidePlayer(false);
 
 
         if (wasHiding)

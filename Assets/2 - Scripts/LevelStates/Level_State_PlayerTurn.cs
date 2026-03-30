@@ -49,6 +49,7 @@ public class Level_State_PlayerTurn : Level_State_Base
 
                 if (currentCase != null && currentCase.CaseTypeData.CaseType == TypeOfCases.Door)
                 {
+                    SoundManager.PlaySound(SoundType.SUCESS, 5f);
                     main.SetLevel();
                 }
                 else
