@@ -981,6 +981,10 @@ PrefabInstance:
       value: _Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 1709896977231679834, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: NPC_BaseState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709896977231679834, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _levelCasesPocket
       value: 
       objectReference: {fileID: 398317584}
@@ -1133,7 +1137,23 @@ PrefabInstance:
       value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _hideIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: db6981760e7aa8245abe8ab3b290733f, type: 3}
+    - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _hideButton
+      value: 
+      objectReference: {fileID: 9129231909300281380}
+    - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _unhideIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d60e8f0550c79d49a9ea9ddf12ca9a3, type: 3}
+    - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: text_LolipopCount
+      value: 
+      objectReference: {fileID: 6410737867805830741}
+    - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _text_LolipopCount
       value: 
       objectReference: {fileID: 6410737867805830741}
     m_RemovedComponents: []
@@ -2221,8 +2241,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260676385}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25292778, y: 0.40582737, z: -0.117942154, w: 0.87029964}
-  m_LocalPosition: {x: 1470.5, y: -1644.28, z: 4261.83}
+  m_LocalRotation: {x: 0.2541389, y: 0.36792028, z: -0.10526777, w: 0.8882381}
+  m_LocalPosition: {x: 1468.968, y: -1643.862, z: 4260.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4112,8 +4132,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771824900}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25292778, y: 0.40582737, z: -0.117942154, w: 0.87029964}
-  m_LocalPosition: {x: -0.9680176, y: 3.607666, z: -5.9697266}
+  m_LocalRotation: {x: 0.2541389, y: 0.36792028, z: -0.10526777, w: 0.8882381}
+  m_LocalPosition: {x: -2.5, y: 4.025635, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5117,6 +5137,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9129231910829236622, guid: 09979ab4658f3834db7162421fe63e2e, type: 3}
   m_PrefabInstance: {fileID: 1596064172}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9129231909300281380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2835521450210599260, guid: 09979ab4658f3834db7162421fe63e2e, type: 3}
+  m_PrefabInstance: {fileID: 1596064172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129231909300281378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

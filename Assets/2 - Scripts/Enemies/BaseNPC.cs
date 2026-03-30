@@ -26,10 +26,16 @@ public class BaseNPC : MonoBehaviour
     private AIAnimator _anim;
     #endregion
 
+    [Header("SkinTexture")]
+    public NPC_Skin Skin => _skin;
+    private NPC_Skin _skin;
+
     protected void Awake()
     {
         _anim = GetComponent<AIAnimator>();
         StateMachine = new NPC_StateManager(new NPC_State_Wait(this));
+        _skin = GetComponent<NPC_Skin>();
+        _skin.SetInstancedMaterial();
     }
 
 

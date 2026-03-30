@@ -5,6 +5,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AdaptivePerformance.VisualScripting;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour
@@ -37,7 +38,7 @@ public class MainGame : MonoBehaviour
         Instance = this;
         _levelManager.Initialize();
         SetLevel(0);
-
+        _uiManager.UpdateHideButton(false);
     }
 
 
@@ -67,7 +68,7 @@ public class MainGame : MonoBehaviour
         _playerController.IsHiding = hide;
         _playerController.Anim?.SetIsHiding(hide);
 
-        _hideButton.GetComponentInChildren<TextMeshProUGUI>().text = hide ? "Unhide" : "Hide";
+        _uiManager.UpdateHideButton(hide);
         HideButton.interactable = false;
     }
 

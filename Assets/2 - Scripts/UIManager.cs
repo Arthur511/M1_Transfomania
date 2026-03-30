@@ -1,13 +1,22 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text_LolipopCount;
+    [SerializeField] private TextMeshProUGUI _text_LolipopCount;
+    [SerializeField] private Button _hideButton;
+    [SerializeField] private Sprite _hideIcon;
+    [SerializeField] private Sprite _unhideIcon;
 
     public void UpdateLolipopText(int newValue)
     {
-        text_LolipopCount.text = newValue.ToString();
+        _text_LolipopCount.text = newValue.ToString();
+    }
+
+    public void UpdateHideButton(bool hide)
+    {
+        _hideButton.GetComponent<Image>().sprite = hide ? _hideIcon : _unhideIcon;
     }
 }

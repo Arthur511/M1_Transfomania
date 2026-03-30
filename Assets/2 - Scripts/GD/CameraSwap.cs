@@ -56,6 +56,8 @@ public class CameraSwap : MonoBehaviour
         yield return new WaitForSeconds(time_before_swap_again);
         Cinematicbrain.SetActive(false);
         MainCamera.SetActive(true);
+        LevelManager lm = MainGame.Instance.LevelManager;
+        lm.StateMachine.SwitchState(new Level_State_PlayerTurn(lm));
     }
 
 

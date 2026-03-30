@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8163607385457966652}
   - component: {fileID: 8699895314827389180}
   - component: {fileID: 4461287223368066986}
+  - component: {fileID: 9208149913343460830}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -146,6 +147,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 8699895314827389180}
   data: {fileID: 11400000, guid: 7aca1604e4596cd4db0c6b5a700069ee, type: 2}
+--- !u!114 &9208149913343460830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235805520565778528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6796b7fe7bc2b4da8d7a1d00926f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 4c11e9aea5f63424aae4103f694b87bb, type: 2}
+  _mesh: {fileID: 6485364811702377319}
 --- !u!1001 &5521724907829872181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,5 +226,10 @@ PrefabInstance:
 --- !u!4 &5416602133352751582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cfcf2c37d22d9b4ea5f3c7f3c07fc84, type: 3}
+  m_PrefabInstance: {fileID: 5521724907829872181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6485364811702377319 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: 8cfcf2c37d22d9b4ea5f3c7f3c07fc84, type: 3}
   m_PrefabInstance: {fileID: 5521724907829872181}
   m_PrefabAsset: {fileID: 0}
