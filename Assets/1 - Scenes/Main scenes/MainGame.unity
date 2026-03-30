@@ -1402,7 +1402,7 @@ PrefabInstance:
     - target: {fileID: 6719727784237854133, guid: 73060384bbf04a54898c075a7e0bdf06, type: 3}
       propertyPath: 'soundlist.Array.data[5]'
       value: 
-      objectReference: {fileID: 8300000, guid: 322bfc22004a7814d9222b8261fef1c1, type: 3}
+      objectReference: {fileID: 8300000, guid: 69db1c15ac03c7f4bb64bf039ab688ad, type: 3}
     - target: {fileID: 6719727784237854133, guid: 73060384bbf04a54898c075a7e0bdf06, type: 3}
       propertyPath: 'soundlist.Array.data[9]'
       value: 
@@ -4362,12 +4362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922ac698b359e7746ad6515f51be519f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  Offset: {x: -3, y: 4, z: -3}
-  MinZoom: 4
-  MaxZoom: 25
-  ZoomLimiter: 50
-  Smoothness: 0
 --- !u!1 &1806814323
 GameObject:
   m_ObjectHideFlags: 0
