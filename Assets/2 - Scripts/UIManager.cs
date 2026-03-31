@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLolipopText(int newValue)
     {
-        _text_LolipopCount.text = newValue > 0 ? newValue.ToString() : "";
+        _text_LolipopCount.text = newValue > 1 ? newValue.ToString() : "";
     }
 
     public void ShowHideButton()

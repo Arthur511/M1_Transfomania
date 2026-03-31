@@ -223,7 +223,7 @@ public class LevelManager : MonoBehaviour
 
     private void InitSpawnEnemies(int x, int y, Vector3 pos, CaseTypeData caseDatas)
     {
-        InitWalkableCase(x, y, pos, caseDatas);
+        //InitWalkableCase(x, y, pos, caseDatas);
         GameObject enemy = Instantiate(_enemyPrefab);
         BaseNPC npcController = enemy.GetComponent<BaseNPC>();
         npcController.Initialize(new Vector2Int(x, y), 0);
@@ -232,7 +232,7 @@ public class LevelManager : MonoBehaviour
 
     private void InitLolypop(int x, int y, Vector3 pos, CaseTypeData caseDatas)
     {
-        InitWalkableCase(x, y, pos, caseDatas);
+        //InitWalkableCase(x, y, pos, caseDatas);
         GameObject lolypop = Instantiate(_lolypopPrefab, pos + new Vector3(0, 1, 0), Quaternion.identity);
         _lolypops.Add(lolypop);
     }
