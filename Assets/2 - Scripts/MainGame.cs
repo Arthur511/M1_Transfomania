@@ -1,11 +1,4 @@
-using System;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.AdaptivePerformance.VisualScripting;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour
@@ -86,6 +79,7 @@ public class MainGame : MonoBehaviour
         _currentLevelIndex++; 
         if (_currentLevelIndex >= Levels.Length)
         {
+            _uiManager.DisplayWinScreen();
             return;
         }
         Level nextLevel = Levels[_currentLevelIndex];
