@@ -17,14 +17,15 @@ public class NPC_State_Chase : NPC_State_Base
             _npc.FacePos(_npc.TargetPosition);
             _npc.Anim.PlayPickingUp();
 
-            if (MainGame.Instance.PlayerController.LollipopCount > 0)
-            {
-                MainGame.Instance.PlayerController.ChangeLolipopCount(false);
-                _npc.Die();
-                return;
-            }
+            MainGame.Instance.LevelManager.StateMachine.SwitchState(new Level_State_WaitAnim(MainGame.Instance.LevelManager,
+                () =>
+                {
+                    var anim = MainGame.Instance.PlayerController.Anim;
+                    return anim == null || anim.IsAnimationComplete();
+                },
+                () => EnemyAttackInteraction()
+            ));
 
-            MainGame.Instance.PlayerController.Die();
             return;
         }
 
@@ -62,4 +63,18 @@ public class NPC_State_Chase : NPC_State_Base
         
     }
 
+
+
+    private void EnemyAttackInteraction()
+    {
+        if (MainGame.Instance.PlayerController.LollipopCount > 0)
+        {
+            MainGame.Instance.PlayerController.ChangeLolipopCount(false);
+            _npc.Die();
+            MainGame.Instance.LevelManager.StateMachine.SwitchState(new Level_State_PlayerTurn(MainGame.Instance.LevelManager));
+            return;
+        }
+
+        MainGame.Instance.PlayerController.Die();
+    }
 }

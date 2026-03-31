@@ -79,7 +79,7 @@ public class Level_State_AITurn : Level_State_Base
                     var anim = MainGame.Instance.PlayerController.Anim;
                     return anim == null || anim.IsPlayingState(_idlePlayerHash);
                 },
-                new Level_State_PlayerTurn(_levelManager) // utiliser NexTurn?
+                () => _levelManager.StateMachine.SwitchState(new Level_State_PlayerTurn(_levelManager)) // utiliser NexTurn?
             ));
         }
         else

@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour
                 var anim = MainGame.Instance.PlayerController.Anim;
                 return anim == null || anim.IsAnimationComplete();
             },
-            new Level_State_AITurn(this) // Faire en sorte de mettre NextTurn à la place
+            () => StateMachine.SwitchState(new Level_State_AITurn(this)) // Faire en sorte de mettre NextTurn à la place
         ));
     }
 

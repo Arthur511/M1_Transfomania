@@ -99,5 +99,7 @@ public class PlayerController : MonoBehaviour
         MainGame.Instance.LevelManager.OnPlayerDie();
         SoundManager.PlaySound(SoundType.CHILDGRAB, 0.2f);
 
+        Debug.Log("PPP Die");
+
     }
 }
