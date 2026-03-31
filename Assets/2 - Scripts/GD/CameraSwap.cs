@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 public class CameraSwap : MonoBehaviour
@@ -24,12 +22,20 @@ public class CameraSwap : MonoBehaviour
     int count = 0;
 
 
-    void Start()
+    private void Awake()
     {
+        Image.gameObject.SetActive(false);
+        asset.gameObject.SetActive(false);
+    }
+
+    public void StartIntro(Action onComplete = null)
+    {
+        Image.gameObject.SetActive(true);
+        asset.gameObject.SetActive(true);
         MainCamera.SetActive(false);
         Cinematicbrain.SetActive(true);
         StartCoroutine(WaitAndSwapMaterial());
-        StartCoroutine(WaitAndSwapAgain());
+        StartCoroutine(WaitAndSwapAgain(onComplete));
         asset.GetComponent<TMP_Text>().text = introtxt[0];
         StartCoroutine(WaitAndSwapTxt());
 
@@ -55,14 +61,16 @@ public class CameraSwap : MonoBehaviour
         Image.GetComponent<Image>().sprite = nouveauSprite;
     }
 
-    IEnumerator WaitAndSwapAgain()
+    IEnumerator WaitAndSwapAgain(Action onComplete)
     {
-        yield return new WaitForSeconds(time_before_swap_again);
+        yield return new WaitForSeconds(time_before_swap_again + MainGame.Instance.UIManager.Fade.FadeDuration);
         Cinematicbrain.SetActive(false);
         MainCamera.SetActive(true);
         yield return null;
         LevelManager lm = MainGame.Instance.LevelManager;
         lm.StateMachine.SwitchState(new Level_State_PlayerTurn(lm));
+
+        onComplete?.Invoke();
     }
 
 

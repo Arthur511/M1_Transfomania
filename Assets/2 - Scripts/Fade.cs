@@ -10,6 +10,7 @@ public class Fade : MonoBehaviour
     public Image FadeImage => _fadeImage;
 
     [Tooltip("Durée fondu en secondes")]
+    public float FadeDuration => _fadeDuration;
     [SerializeField] private float _fadeDuration = 1.0f;
     
     public void FadeOut(Action onComplete = null)

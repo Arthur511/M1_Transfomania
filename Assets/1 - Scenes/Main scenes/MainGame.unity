@@ -1029,6 +1029,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c7ef547611bd0cd4cabbe8584b795eaa, type: 3}
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _cameraSwap
+      value: 
+      objectReference: {fileID: 1839766207}
+    - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _hideButton
       value: 
       objectReference: {fileID: 9129231909300281378}
@@ -1172,6 +1176,10 @@ PrefabInstance:
       propertyPath: _unhideIcon
       value: 
       objectReference: {fileID: 21300000, guid: 5d60e8f0550c79d49a9ea9ddf12ca9a3, type: 3}
+    - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: _lolipopIcon
+      value: 
+      objectReference: {fileID: 1069838999}
     - target: {fileID: 6971678151814783313, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _winScreenButton
       value: 
@@ -2129,7 +2137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &944002330
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2327,6 +2335,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_ActionId: 24908448-c609-4bc3-a128-ea258674378a
+--- !u!1 &1069838999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6350868501647795813, guid: 09979ab4658f3834db7162421fe63e2e, type: 3}
+  m_PrefabInstance: {fileID: 1596064172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1072436629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4603,11 +4616,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771824900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
+  m_Script: {fileID: 11500000, guid: 922ac698b359e7746ad6515f51be519f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  Offset: {x: -3, y: 4, z: -3}
+  Offset: {x: -3, y: 10, z: -3}
   MinZoom: 4
   MaxZoom: 25
   ZoomLimiter: 50
@@ -4868,6 +4881,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeImage: {fileID: 755927212}
   _fadeDuration: 1
+--- !u!114 &1839766207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4214383613587479905, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+  m_PrefabInstance: {fileID: 608722849}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839766192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad45357ea4206d3449b5b08a5fb8aa4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1868000886
 GameObject:
   m_ObjectHideFlags: 0

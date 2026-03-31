@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeLolipopCount(bool increase)
     {
         _lollipopCount += increase? 1 : -1;
+        MainGame.Instance.UIManager.ShowLolipopIcon(_lollipopCount);
         MainGame.Instance.UIManager.UpdateLolipopText(_lollipopCount);
     }
 

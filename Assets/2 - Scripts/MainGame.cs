@@ -9,6 +9,7 @@ public class MainGame : MonoBehaviour
     public LevelManager LevelManager => _levelManager;
     public New_CameraFollow CameraFollow => _cameraFollow;
     public UIManager UIManager => _uiManager;
+    public CameraSwap CameraSwap => _cameraSwap;
 
     public LayerMask BoxLayer => _boxLayer;
     public Button HideButton => _hideButton.GetComponent<Button>();
@@ -18,6 +19,7 @@ public class MainGame : MonoBehaviour
     [SerializeField] PlayerController _playerController;
     [SerializeField] LevelManager _levelManager;
     [SerializeField] UIManager _uiManager;
+    [SerializeField] CameraSwap _cameraSwap;
     [Header("Variables")]
     [SerializeField] LayerMask _boxLayer;
     [SerializeField] GameObject _hideButton;
@@ -32,7 +34,7 @@ public class MainGame : MonoBehaviour
         Instance = this;
         _levelManager.Initialize();
         SetLevel(0, true);
-        _uiManager.Fade.FadeIn(delay: 1.5f);
+        _uiManager.Fade.FadeIn(delay: 1.5f, onComplete : () => _cameraSwap.StartIntro(_uiManager.ShowHideButton));
         _uiManager.UpdateHideButton(false);
     }
 
