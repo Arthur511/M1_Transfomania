@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: SpriteRenderer
       value: 
       objectReference: {fileID: 21300000, guid: c7ef547611bd0cd4cabbe8584b795eaa, type: 3}
+    - target: {fileID: 4214383613587479905, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
+      propertyPath: time_before_swap_again
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _cameraSwap
       value: 
@@ -1039,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _cameraFollow
       value: 
-      objectReference: {fileID: 1771824911}
+      objectReference: {fileID: 1771824912}
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _playerController
       value: 
@@ -4441,6 +4445,7 @@ GameObject:
   - component: {fileID: 1771824906}
   - component: {fileID: 1771824909}
   - component: {fileID: 1771824911}
+  - component: {fileID: 1771824912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4619,8 +4624,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922ac698b359e7746ad6515f51be519f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1771824912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771824900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  Offset: {x: -3, y: 10, z: -3}
+  Offset: {x: -3, y: 4, z: -3}
   MinZoom: 4
   MaxZoom: 25
   ZoomLimiter: 50
