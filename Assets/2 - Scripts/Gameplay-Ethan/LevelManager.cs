@@ -86,8 +86,6 @@ public class LevelManager : MonoBehaviour
 
     public void Initialize()
     {
-        MainGame.Instance.UIManager.Fade.FadeOut();
-
         StateMachine = new Level_StateManager();
         InitCaseInstAction();
         InitCaseContentAction();

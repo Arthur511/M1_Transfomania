@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         _winScreenButton.gameObject.SetActive(false);
+        //Color fadeColor = Fade.FadeImage.color;
+        //Color newAlpha = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 1);
+        //Fade.FadeImage.color = newAlpha;
+        Fade.FadeImage.gameObject.SetActive(true);
     }
 
     public void UpdateLolipopText(int newValue)

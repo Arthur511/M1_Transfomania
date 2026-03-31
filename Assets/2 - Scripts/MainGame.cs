@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class MainGame : MonoBehaviour
     public New_CameraFollow CameraFollow => _cameraFollow;
     public UIManager UIManager => _uiManager;
 
-    public LayerMask BoxLayer => _boxLayer; 
+    public LayerMask BoxLayer => _boxLayer;
     public Button HideButton => _hideButton.GetComponent<Button>();
 
     [Header("References")]
@@ -31,6 +32,7 @@ public class MainGame : MonoBehaviour
         Instance = this;
         _levelManager.Initialize();
         SetLevel(0, true);
+        _uiManager.Fade.FadeIn(delay: 1.5f);
         _uiManager.UpdateHideButton(false);
     }
 
@@ -43,7 +45,7 @@ public class MainGame : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+
     }
 
 
@@ -54,8 +56,8 @@ public class MainGame : MonoBehaviour
 
         HidePlayer(!_playerController.IsHiding);
         //LevelManager.NextTurn();
-        
-        
+
+
     }
 
 
@@ -76,15 +78,17 @@ public class MainGame : MonoBehaviour
     /// </summary>
     public void SetLevel()
     {
-        _currentLevelIndex++; 
+        _currentLevelIndex++;
         if (_currentLevelIndex >= Levels.Length)
         {
             _uiManager.DisplayWinScreen();
             return;
         }
-        Level nextLevel = Levels[_currentLevelIndex];
+        //Level nextLevel = Levels[_currentLevelIndex];
 
-        LevelManager.LoadNewLevel(nextLevel);
+        //LevelManager.LoadNewLevel(nextLevel);
+
+        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex]));
     }
 
     /// <summary>
@@ -106,6 +110,22 @@ public class MainGame : MonoBehaviour
 
     public void OnPlayerDie()
     {
-        SetLevel(_currentLevelIndex);
+        //SetLevel(_currentLevelIndex);
+        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex]));
     }
+
+
+    private IEnumerator TransitionToLevel(Level nextLevel)
+    {
+        LevelManager.StateMachine.SwitchState(new Level_StatePause(LevelManager));
+
+        bool fadeDone = false;
+        _uiManager.Fade.FadeOut(() => fadeDone = true);
+        yield return new WaitUntil(() => fadeDone);
+
+        LevelManager.LoadNewLevel(nextLevel);
+
+        _uiManager.Fade.FadeIn(delay: 1.5f);
+    }
+
 }
