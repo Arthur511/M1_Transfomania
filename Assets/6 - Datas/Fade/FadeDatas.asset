@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0902df85ea4d5c141bb8ad1d41ce8a38, type: 3}
+  m_Name: FadeDatas
+  m_EditorClassIdentifier: 
+  _nextLevel_FadeDuration: 1
+  _nextLevel_fullOpacityDuration: 1.5
+  _death_FadeDuration: 0.5
+  _death_fullOpacityDuration: 0.75
+  _toMenu_FadeDuration: 1.5
+  _toMenu_fullOpacityDuration: 0

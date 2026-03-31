@@ -63,7 +63,7 @@ public class CameraSwap : MonoBehaviour
 
     IEnumerator WaitAndSwapAgain(Action onComplete)
     {
-        yield return new WaitForSeconds(time_before_swap_again + MainGame.Instance.UIManager.Fade.FadeDuration);
+        yield return new WaitForSeconds(time_before_swap_again + MainGame.Instance.UIManager.Fade.FadeDatasSO.NextLevel_FadeDuration);
         Cinematicbrain.SetActive(false);
         MainCamera.SetActive(true);
         yield return null;

@@ -10,48 +10,43 @@ public class Fade : MonoBehaviour
     public Image FadeImage => _fadeImage;
 
     [Tooltip("Durée fondu en secondes")]
-    public float FadeDuration => _fadeDuration;
-    [SerializeField] private float _fadeDuration = 1.0f;
-    
-    public void FadeOut(Action onComplete = null)
+
+    public FadeDatasSO FadeDatasSO => _fadeDatasSO;
+    [SerializeField] private FadeDatasSO _fadeDatasSO;
+
+    public void FadeOut(float fadeDuration, float delay = 0f, Action onComplete = null)
     {
         //Color fadeColor = _fadeImage.color;
         //Color newAlpha = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 1);
         //_fadeImage.color = newAlpha;
         StopAllCoroutines();
-        StartCoroutine(ProcessFade(1f, onComplete));
+        StartCoroutine(ProcessFade(1f, fadeDuration, onComplete, delay));
     }
 
-    public void FadeIn(float delay = 0f, Action onComplete = null)
+    public void FadeIn(float fadeDuration, float delay = 0f, Action onComplete = null)
     {
         //Color fadeColor = _fadeImage.color;
         //Color newAlpha = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 255);
         //_fadeImage.color = newAlpha;
         StopAllCoroutines();
-        StartCoroutine(ProcessFadeIn(delay, onComplete)); // () => { _fadeImage.gameObject.SetActive(false); onComplete?.Invoke(); })
-    }
-
-    private IEnumerator ProcessFadeIn(float delay, Action onComplete)
-    {
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-        yield return ProcessFade(0f, onComplete);
+        StartCoroutine(ProcessFade(0f, fadeDuration, onComplete, delay)); // () => { _fadeImage.gameObject.SetActive(false); onComplete?.Invoke(); })
     }
 
 
 
-    private IEnumerator ProcessFade(float targetAlpha, Action onComplete = null)
+    private IEnumerator ProcessFade(float targetAlpha, float fadeDuration, Action onComplete = null, float delay = 0)
     {
+        yield return new WaitForSeconds(targetAlpha == 0 ? delay : 0);
+
         _fadeImage.gameObject.SetActive(true);
         float startAlpha = _fadeImage.color.a;
         float time = 0;
 
-        while (time < _fadeDuration)
+        while (time < fadeDuration)
         {
             time += Time.deltaTime;
             Color tempColor = _fadeImage.color;
-            tempColor.a = Mathf.Lerp(startAlpha, targetAlpha, time / _fadeDuration);
+            tempColor.a = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
             _fadeImage.color = tempColor;
             yield return null;
         }
@@ -62,6 +57,8 @@ public class Fade : MonoBehaviour
 
         if (targetAlpha == 0f)
             _fadeImage.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(targetAlpha == 1 ? delay : 0);
 
         onComplete?.Invoke();
     }

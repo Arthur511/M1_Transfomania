@@ -28,13 +28,16 @@ public class MainGame : MonoBehaviour
     [SerializeField] private Level[] Levels;
     private int _currentLevelIndex = 0;
 
+    private FadeDatasSO _fadeDatasSO;
+
 
     void Awake()
     {
         Instance = this;
         _levelManager.Initialize();
         SetLevel(0, true);
-        _uiManager.Fade.FadeIn(delay: 1.5f, onComplete : () => _cameraSwap.StartIntro(_uiManager.ShowHideButton));
+        _fadeDatasSO = _uiManager.Fade.FadeDatasSO;
+        _uiManager.Fade.FadeIn(_fadeDatasSO.NextLevel_FadeDuration, delay: _fadeDatasSO.NextLevel_FullOpacityDuration, onComplete : () => _cameraSwap.StartIntro(_uiManager.ShowHideButton));
         _uiManager.UpdateHideButton(false);
     }
 
@@ -90,7 +93,7 @@ public class MainGame : MonoBehaviour
 
         //LevelManager.LoadNewLevel(nextLevel);
 
-        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex]));
+        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex], _fadeDatasSO.NextLevel_FadeDuration, _fadeDatasSO.NextLevel_FullOpacityDuration));
     }
 
     /// <summary>
@@ -113,21 +116,21 @@ public class MainGame : MonoBehaviour
     public void OnPlayerDie()
     {
         //SetLevel(_currentLevelIndex);
-        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex]));
+        StartCoroutine(TransitionToLevel(Levels[_currentLevelIndex], _fadeDatasSO.Death_FadeDuration, _fadeDatasSO.Death_FullOpacityDuration));
     }
 
 
-    private IEnumerator TransitionToLevel(Level nextLevel)
+    private IEnumerator TransitionToLevel(Level nextLevel, float fadeDuration, float fullOpacityDuration)
     {
         LevelManager.StateMachine.SwitchState(new Level_StatePause(LevelManager));
 
         bool fadeDone = false;
-        _uiManager.Fade.FadeOut(() => fadeDone = true);
+        _uiManager.Fade.FadeOut(fadeDuration, onComplete : () => fadeDone = true);
         yield return new WaitUntil(() => fadeDone);
 
         LevelManager.LoadNewLevel(nextLevel);
 
-        _uiManager.Fade.FadeIn(delay: 1.5f);
+        _uiManager.Fade.FadeIn(fadeDuration, delay : fullOpacityDuration);
     }
 
 }

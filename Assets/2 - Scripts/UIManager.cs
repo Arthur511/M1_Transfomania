@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickWinScreen()
     {
-        SceneManager.LoadScene("MainMenu");
+        Fade.FadeOut(Fade.FadeDatasSO.ToMenu_FadeDuration, delay : Fade.FadeDatasSO.ToMenu_FullOpacityDuration, () => SceneManager.LoadScene("MainMenu"));
+        
     }
 }
