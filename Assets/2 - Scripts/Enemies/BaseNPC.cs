@@ -32,6 +32,8 @@ public class BaseNPC : MonoBehaviour
     public NPC_Skin Skin => _skin;
     private NPC_Skin _skin;
 
+    [SerializeField] EnemyFxSO _enemyFxSO;
+
     protected void Awake()
     {
         _anim = GetComponent<AIAnimator>();
@@ -142,6 +144,8 @@ public class BaseNPC : MonoBehaviour
 
     public void Die()
     {
+        GameObject deathFX = Instantiate(_enemyFxSO.DeathFX, this.transform.position, Quaternion.identity);
+        Destroy(deathFX, 3);
         MainGame.Instance.LevelManager.Ennemies.Remove(this);
         Destroy(this.gameObject);
         SoundManager.PlaySound(SoundType.CHILDJOY, 0.2f);

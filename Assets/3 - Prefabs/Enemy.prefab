@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _startPosition: {x: 4, y: 5}
+  _enemyFxSO: {fileID: 11400000, guid: a7c7909adec6dcf41b22a992675e9d59, type: 2}
 --- !u!95 &8699895314827389180
 Animator:
   serializedVersion: 7
