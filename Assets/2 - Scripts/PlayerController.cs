@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             ChangeLolipopCount(true);
-            SoundManager.PlaySound(SoundType.LOLIPOP, 5f);
+            SoundManager.PlaySound(SoundType.LOLIPOP, 1f);
         }
     }
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         MainGame.Instance.LevelManager.OnPlayerDie();
-        SoundManager.PlaySound(SoundType.CHILDGRAB, 5f);
+        SoundManager.PlaySound(SoundType.CHILDGRAB, 0.2f);
 
     }
 }

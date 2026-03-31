@@ -14,7 +14,7 @@ public class PlaySoundClic : MonoBehaviour
 
     public void PLAYSOUND()
     {
-        SoundManager.PlaySound(SoundType.CLIC, 50f);
+        SoundManager.PlaySound(SoundType.CLIC, 2f);
     }
 
 

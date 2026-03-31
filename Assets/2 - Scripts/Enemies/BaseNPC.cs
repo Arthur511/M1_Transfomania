@@ -144,6 +144,6 @@ public class BaseNPC : MonoBehaviour
     {
         MainGame.Instance.LevelManager.Ennemies.Remove(this);
         Destroy(this.gameObject);
-        SoundManager.PlaySound(SoundType.CHILDJOY, 5f);
+        SoundManager.PlaySound(SoundType.CHILDJOY, 0.2f);
     }
 }

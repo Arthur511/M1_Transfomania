@@ -67,7 +67,7 @@ public class MainGame : MonoBehaviour
 
         _uiManager.UpdateHideButton(hide);
         HideButton.interactable = false;
-        SoundManager.PlaySound(SoundType.HIDE, 5f);
+        SoundManager.PlaySound(SoundType.HIDE, 0.5f);
     }
 
 

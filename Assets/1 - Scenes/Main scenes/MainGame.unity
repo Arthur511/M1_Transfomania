@@ -1035,7 +1035,7 @@ PrefabInstance:
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _cameraFollow
       value: 
-      objectReference: {fileID: 1771824910}
+      objectReference: {fileID: 1771824911}
     - target: {fileID: 6313684686482678917, guid: c662302be7b6d8847bf07a22c6d8ad1e, type: 3}
       propertyPath: _playerController
       value: 
@@ -2573,8 +2573,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260676385}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25292778, y: 0.40582737, z: -0.117942154, w: 0.87029964}
-  m_LocalPosition: {x: 1470.5, y: -1644.28, z: 4261.83}
+  m_LocalRotation: {x: 0.2541389, y: 0.36792028, z: -0.10526777, w: 0.8882381}
+  m_LocalPosition: {x: 1468.968, y: -1643.862, z: 4260.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4427,7 +4427,7 @@ GameObject:
   - component: {fileID: 1771824904}
   - component: {fileID: 1771824906}
   - component: {fileID: 1771824909}
-  - component: {fileID: 1771824910}
+  - component: {fileID: 1771824911}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4494,8 +4494,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771824900}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25292778, y: 0.40582737, z: -0.117942154, w: 0.87029964}
-  m_LocalPosition: {x: -0.9680176, y: 3.607666, z: -5.9697266}
+  m_LocalRotation: {x: 0.2541389, y: 0.36792028, z: -0.10526777, w: 0.8882381}
+  m_LocalPosition: {x: -2.5, y: 4.025635, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4594,7 +4594,7 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 241dcbd817367964ead9afaff34cba06, type: 2}
---- !u!114 &1771824910
+--- !u!114 &1771824911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4603,7 +4603,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1771824900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a9332576e7a75499b28340357d7e13, type: 3}
+  m_Script: {fileID: 11500000, guid: d72ab508972e5d647a1bd4bf05ba4379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
