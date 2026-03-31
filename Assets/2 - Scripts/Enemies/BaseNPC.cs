@@ -142,6 +142,20 @@ public class BaseNPC : MonoBehaviour
     }
 
 
+    public void AttackInteraction()
+    {
+        if (MainGame.Instance.PlayerController.LollipopCount > 0)
+        {
+            MainGame.Instance.PlayerController.ChangeLolipopCount(false);
+            Die();
+            MainGame.Instance.LevelManager.StateMachine.SwitchState(new Level_State_PlayerTurn(MainGame.Instance.LevelManager));
+            return;
+        }
+
+        MainGame.Instance.PlayerController.Die();
+    }
+
+
     public void Die()
     {
         GameObject deathFX = Instantiate(_enemyFxSO.DeathFX, this.transform.position, Quaternion.identity);

@@ -45,6 +45,44 @@ public class Level_State_PlayerTurn : Level_State_Base
                 _isPlayerMoving = false;
                 main.PlayerController.Anim?.PlayIdle();
 
+                BaseNPC enemyAtPos = main.LevelManager.Ennemies.Find(e => e != null && e.CurrentPosition == main.PlayerController.PlayerPosition);
+                if (enemyAtPos != null)
+                {
+                    enemyAtPos.FacePos(main.PlayerController.transform.position);
+                    enemyAtPos.Anim.PlayPickingUp();
+
+                    _levelManager.StateMachine.SwitchState(new Level_State_WaitAnim(
+                        _levelManager,
+                        () =>
+                        {
+                            var anim = main.PlayerController.Anim;
+                            return anim == null || anim.IsAnimationComplete();
+                        },
+                        () => enemyAtPos.AttackInteraction()
+                    ));
+                    return;
+                }
+
+                if (enemyAtPos != null)
+                {
+                    // Le NPC regarde le joueur et joue l'animation de ramassage
+                    enemyAtPos.FacePos(main.PlayerController.transform.position);
+                    enemyAtPos.Anim.PlayPickingUp();
+
+                    // On attend la fin de l'animation puis on résout l'interaction
+                    _levelManager.StateMachine.SwitchState(new Level_State_WaitAnim(
+                        _levelManager,
+                        () =>
+                        {
+                            var anim = main.PlayerController.Anim;
+                            return anim == null || anim.IsAnimationComplete();
+                        },
+                        () => enemyAtPos.AttackInteraction()
+                    ));
+                    return;
+                }
+                // -----
+
                 Case currentCase = main.LevelManager.Map[main.PlayerController.PlayerPosition.x, main.PlayerController.PlayerPosition.y];
 
                 if (currentCase != null && currentCase.CaseTypeData.CaseType == TypeOfCases.Door)
